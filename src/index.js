@@ -1,13 +1,71 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import reportWebVitals from "./reportWebVitals";
+
+import Layout from "./screens/layout";
+import ErrorPage from "./screens/error-page";
+import Contact from "./screens/contact";
+import Products from "./screens/products";
+import About from "./screens/about";
+import Profile from "./screens/profile";
+import Orders from "./screens/orders";
+import Logout from "./screens/logout";
+import Login from "./screens/login";
+import Signup from "./screens/signup";
+import Forgot from "./screens/forgot";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "contact",
+        element: <Contact />,
+      },
+      {
+        path: "products",
+        element: <Products />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
+      },
+      {
+        path: "logout",
+        element: <Logout />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
+      {
+        path: "forgot",
+        element: <Forgot />,
+      },
+    ],
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
