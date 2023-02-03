@@ -35,7 +35,7 @@ const pages = [
   },
 ];
 const settings = [
-  { title: "Sign in", link: "signin" },
+  { title: "Sign in", link: "login" },
   { title: "Sign up", link: "signup" },
   { title: "Forgot Password", link: "forgot" },
   { title: "Profile", link: "profile" },
