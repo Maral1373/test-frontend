@@ -116,10 +116,11 @@ function ResponsiveAppBar(props) {
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
           <Typography
-            variant="h4"
+            variant="h6"
             noWrap
             component="a"
             href="/"
+            underline="none"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -168,8 +169,20 @@ function ResponsiveAppBar(props) {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Link to={page.link}>
+                <MenuItem
+                  key={page.title}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": {
+                      backgroundColor: "#EAE0DA",
+                    },
+                  }}
+                >
+                  <Link
+                    to={page.link}
+                    style={{ textDecoration: "none", color: "#282A3A" }}
+                  >
                     <Typography textAlign="center">{page.title}</Typography>
                   </Link>
                 </MenuItem>
@@ -207,7 +220,7 @@ function ResponsiveAppBar(props) {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
           <Box sx={{ flexGrow: 0.1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link to={page.link}>
+              <Link to={page.link} style={{ textDecoration: "none" }}>
                 {/** change styling here, remove underline for links */}
                 <Button
                   key={page.title}
@@ -249,8 +262,20 @@ function ResponsiveAppBar(props) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Link to={setting.link}>
+                <MenuItem
+                  key={setting}
+                  onClick={handleCloseUserMenu}
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": {
+                      backgroundColor: "#EAE0DA",
+                    },
+                  }}
+                >
+                  <Link
+                    to={setting.link}
+                    style={{ textDecoration: "none", color: "#282A3A" }}
+                  >
                     {/** change styling, remove underline */}
                     <Typography textAlign="center">{setting.title}</Typography>
                   </Link>
