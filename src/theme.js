@@ -3,23 +3,35 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#A0C3D2",
+      main: "#B08401",
     },
   },
-  backgroundColor: "#e8eaf6",
+  backgroundColor: "#DED1BD",
   secondary: {
-    main: "#EAC7C7",
+    main: "#D49E8D",
   },
   typography: {
-    fontFamily: `"Indie Flower", cursive`,
-    fontSize: 14,
-    fontWeightLight: 300,
-    fontWeightRegular: 400,
-    fontWeightMedium: 500,
-    poster: {
-      color: "red",
-    },
+    fontFamily: `"EB Garamond", serif`,
   },
+  // typography: {
+  //   // fontFamily: `"Indie Flower", cursive`,
+  //   fontFamily: "serif",
+  //   fontSize: 14,
+  //   fontWeightLight: 300,
+  //   fontWeightRegular: 400,
+  //   fontWeightMedium: 500,
+  //   poster: {
+  //     color: "red",
+  //   },
+  // },
 });
 
 export default theme;
+
+// C O L O R S
+
+//  #B08401
+//  #683B2B
+//  #FAF6F2
+//  #D49E8D
+//  #DED1BD

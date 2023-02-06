@@ -56,7 +56,7 @@ export default function Products() {
           >
             <Avatar
               sx={{
-                bgcolor: "#EAC7C7",
+                bgcolor: "#DED1BD",
                 marginBottom: "5",
                 height: "100px",
                 width: "100px",
@@ -74,7 +74,7 @@ export default function Products() {
             </Box>
             <Avatar
               sx={{
-                bgcolor: "#A0C3D2",
+                bgcolor: "#683B2B",
                 marginBottom: "5",
                 height: "100px",
                 width: "100px",
@@ -93,7 +93,7 @@ export default function Products() {
             </Box>
             <Avatar
               sx={{
-                bgcolor: "#EAC7C7",
+                bgcolor: "#D49E8D",
                 marginBottom: "5",
                 height: "100px",
                 width: "100px",
@@ -133,7 +133,7 @@ export default function Products() {
                   },
                   cursor: "pointer",
                   "&:hover": {
-                    backgroundColor: " #F7F5EB",
+                    backgroundColor: "#FAF6F2",
                   },
                 }}
               >
@@ -169,14 +169,14 @@ export default function Products() {
                     aria-label="add to shopping cart"
                     sx={{
                       "&:hover": {
-                        bgcolor: "#c8e6c9",
+                        bgcolor: "#DED1BD",
                       },
                     }}
                   >
                     <AddShoppingCartIcon
                       sx={{
                         cursor: "pointer",
-                        color: "#388e3c",
+                        color: "#B08401",
                       }}
                     />
                   </IconButton>
@@ -185,14 +185,14 @@ export default function Products() {
                     color="danger"
                     sx={{
                       "&:hover": {
-                        bgcolor: "#ffcdd2",
+                        bgcolor: "#DED1BD",
                       },
                     }}
                   >
                     <FavoriteBorder
                       sx={{
                         cursor: "pointer",
-                        color: "red",
+                        color: "#683B2B",
                         "&:hover": {
                           borderColor: "purple",
                         },

@@ -52,10 +52,10 @@ const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: 20,
+  marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(9),
+    marginLeft: theme.spacing("20%"),
     width: "auto",
   },
 }));
@@ -113,7 +113,7 @@ function ResponsiveAppBar(props) {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <ShoppingBagOutlinedIcon
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            sx={{ display: { xs: "none", md: "flex" }, ml: -40 }}
           />
           <Typography
             variant="h6"
@@ -125,10 +125,10 @@ function ResponsiveAppBar(props) {
               mr: 2,
               display: { xs: "none", md: "flex" },
               letterSpacing: "0.1rem",
-              color: "#282A3A",
+              color: "#FAF6F2",
               textDecoration: "none",
               typography: {
-                fontFamily: `"Indie Flower", cursive`,
+                fontFamily: `"EB Garamond", serif`,
                 fontSize: 14,
                 fontWeight: 700,
               },
@@ -175,7 +175,7 @@ function ResponsiveAppBar(props) {
                   sx={{
                     cursor: "pointer",
                     "&:hover": {
-                      backgroundColor: "#EAE0DA",
+                      backgroundColor: "#D49E8D",
                     },
                   }}
                 >
@@ -202,7 +202,7 @@ function ResponsiveAppBar(props) {
               fontFamily: "inherit",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "#282A3A",
+              color: "#FAF6F2",
               textDecoration: "none",
             }}
           >
@@ -218,7 +218,7 @@ function ResponsiveAppBar(props) {
             />
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
-          <Box sx={{ flexGrow: 0.1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Link to={page.link} style={{ textDecoration: "none" }}>
                 {/** change styling here, remove underline for links */}
@@ -227,7 +227,7 @@ function ResponsiveAppBar(props) {
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
-                    color: "#282A3A",
+                    color: "#FAF6F2",
                     display: "block",
                     "&:hover": {
                       backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -241,12 +241,15 @@ function ResponsiveAppBar(props) {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0, marginLeft: 8 }}
+              >
                 <Avatar alt="Maral Erfanian" src="" />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: "45px", marginLeft: "-15px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -268,7 +271,7 @@ function ResponsiveAppBar(props) {
                   sx={{
                     cursor: "pointer",
                     "&:hover": {
-                      backgroundColor: "#EAE0DA",
+                      backgroundColor: "#D49E8D",
                     },
                   }}
                 >
