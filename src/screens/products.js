@@ -13,7 +13,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useTheme } from "@mui/material";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -181,18 +181,19 @@ export default function Products() {
                     />
                   </IconButton>
                   <IconButton
-                    variant="plain"
-                    color="danger"
+                    aria-label="add to favorites"
+                    // variant="plain"
+                    // color="danger"
                     sx={{
                       "&:hover": {
                         bgcolor: "#DED1BD",
                       },
                     }}
                   >
-                    <FavoriteBorder
+                    <FavoriteIcon
                       sx={{
                         cursor: "pointer",
-                        color: "#683B2B",
+                        color: "#ff8a80",
                         "&:hover": {
                           borderColor: "purple",
                         },
