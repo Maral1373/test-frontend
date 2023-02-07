@@ -113,7 +113,7 @@ function ResponsiveAppBar(props) {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <ShoppingBagOutlinedIcon
-            sx={{ display: { xs: "none", md: "flex" }, ml: -40 }}
+            sx={{ display: { xs: "none", md: "flex" }, ml: -10 }}
           />
           <Typography
             variant="h6"

@@ -45,70 +45,123 @@ export default function Products() {
             />
           </Typography>
           <Grid
-            item
-            xs={12}
-            sm={10}
-            md={4}
-            sx={{ pt: 4 }}
-            direction="row"
-            spacing={2}
-            justifyContent="center"
+            container
+            sx={{
+              marginLeft: "5%",
+              maxWidth: "100vw",
+            }}
           >
-            <Avatar
-              sx={{
-                bgcolor: "#DED1BD",
-                marginBottom: "5",
-                height: "100px",
-                width: "100px",
-                display: "flex",
-                flexDirection: "column",
-                margin: "auto",
-              }}
+            <Grid
               item
-              xs={4}
+              xs={12}
+              sm={6}
+              md={3}
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
             >
-              <LocalShippingOutlinedIcon fontSize="large" />
-            </Avatar>
-            <Box item xs={4} marginBottom={5} textAlign={"center"}>
-              Free shipping up to $50
-            </Box>
-            <Avatar
-              sx={{
-                bgcolor: "#683B2B",
-                marginBottom: "5",
-                height: "100px",
-                width: "100px",
-                display: "flex",
-                flexDirection: "column",
-                margin: "auto",
-              }}
+              <Avatar
+                sx={{
+                  bgcolor: "#DED1BD",
+                  marginBottom: "5",
+                  height: "100px",
+                  width: "100px",
+                  display: "flex",
+                  flexDirection: "column",
+                  margin: "auto",
+                  marginRight: "10%",
+                }}
+                item
+                xs={4}
+              >
+                <LocalShippingOutlinedIcon fontSize="large" />
+              </Avatar>
+              <Box
+                item
+                xs={4}
+                marginBottom={5}
+                textAlign={"center"}
+                marginLeft={"63%"}
+                marginTop={"5%"}
+              >
+                Free shipping up to $50
+              </Box>
+            </Grid>
+            <Grid
               item
-              xs={4}
+              xs={12}
+              sm={6}
+              md={3}
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
             >
-              <CategoryIcon fontSize="large" />
-            </Avatar>
+              <Avatar
+                sx={{
+                  bgcolor: "#683B2B",
+                  marginBottom: "5",
+                  height: "100px",
+                  width: "100px",
+                  display: "flex",
+                  flexDirection: "column",
+                  margin: "auto",
+                  marginRight: "10%",
+                }}
+                item
+                xs={4}
+              >
+                <CategoryIcon fontSize="large" />
+              </Avatar>
 
-            <Box item xs={4} marginBottom={5} textAlign={"center"}>
-              Product well package
-            </Box>
-            <Avatar
-              sx={{
-                bgcolor: "#D49E8D",
-                marginBottom: "5",
-                height: "100px",
-                width: "100px",
-                display: "flex",
-                flexDirection: "column",
-                margin: "auto",
-              }}
+              <Box
+                item
+                xs={4}
+                marginBottom={5}
+                textAlign={"center"}
+                marginLeft={"63%"}
+                marginTop={"5%"}
+              >
+                Product well package
+              </Box>
+            </Grid>
+            <Grid
               item
-              xs={4}
+              xs={12}
+              sm={6}
+              md={3}
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
             >
-              <SupportAgentIcon fontSize="large" />
-            </Avatar>
-            <Box item xs={12} textAlign={"center"}>
-              Support
-            </Box>
+              <Avatar
+                sx={{
+                  bgcolor: "#D49E8D",
+                  marginBottom: "5",
+                  height: "100px",
+                  width: "100px",
+                  display: "flex",
+                  flexDirection: "column",
+                  margin: "auto",
+                  marginRight: "10%",
+                }}
+                item
+                xs={4}
+              >
+                <SupportAgentIcon fontSize="large" />
+              </Avatar>
+              <Box
+                item
+                xs={12}
+                textAlign={"center"}
+                marginLeft={"63%"}
+                marginTop={"5%"}
+              >
+                Support
+              </Box>
+            </Grid>
           </Grid>
         </Container>
       </Box>
