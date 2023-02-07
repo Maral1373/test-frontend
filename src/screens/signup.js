@@ -10,15 +10,56 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useState } from "react";
 
 export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
+    registerUser();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
     });
+  };
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  const onChange = (e) => {
+    if (e.target.name === "firstName") {
+      setFirstName(e.target.value);
+    } else if (e.target.name === "lastName") {
+      setLastName(e.target.value);
+    } else if (e.target.name === "password") {
+      setPassword(e.target.value);
+    } else if (e.target.name === "email") {
+      setEmail(e.target.value);
+    }
+  };
+
+  const registerUser = async () => {
+    const request = await fetch("http://127.0.0.1:3400/api/auth/register", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({
+        firstName,
+        password,
+        email,
+        lastName,
+      }),
+    });
+    const result = await request.json();
+    console.log(result);
   };
 
   return (
@@ -48,6 +89,7 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -58,6 +100,7 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -68,6 +111,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -79,6 +123,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12}>
