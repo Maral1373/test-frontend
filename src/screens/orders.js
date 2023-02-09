@@ -2,107 +2,61 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useTheme } from "@mui/material";
+import { Button, useTheme } from "@mui/material";
+import Box from "@mui/material/Box";
+import ClearIcon from "@mui/icons-material/Clear";
+import ButtonBase from "@mui/material/ButtonBase";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import { Container } from "@mui/system";
 
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-
+const Img = styled("img")({
+  margin: "auto",
+  display: "block",
+  maxHeight: "10vh",
+});
 
 export default function Orders() {
   const theme = useTheme();
   return (
     <main>
-      <Grid
-        container
-        // spacing={3}
+      <Container
         sx={{
-          marginLeft: "37%",
-          maxWidth: "30vw",
+          p: 9,
+          margin: "auto",
+          maxWidth: "50vw",
+          flexGrow: 1,
+          backgroundColor: (theme) =>
+            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
         }}
       >
         <Grid
-          item
-          xs="6"
-          sm={2}
-          md={3}
-          sx={{ pt: 4, border: "dotted green 2px" }}
-          direction="row"
-          spacing={2}
-          justifyContent="center"
-        >
-          Product List
-        </Grid>
-        <Grid
-          item
-          xs
-          sm={2}
-          md={3}
-          sx={{ pt: 4, border: "dotted orange 2px" }}
-          direction="row"
-          spacing={2}
-          justifyContent="center"
-        >
-          Price
-        </Grid>
-        <Grid
-          item
-          xs
-          sm={2}
-          md={3}
-          sx={{ pt: 4, border: "dotted blue 2px" }}
-          direction="row"
-          spacing={2}
-          justifyContent="center"
-        >
-          Quantity
-        </Grid>
-        <Grid
-          item
-          xs
-          sm={6}
-          md={3}
-          sx={{ pt: 4, border: "dotted red 2px" }}
-          direction="row"
-          spacing={2}
-          justifyContent="center"
-        >
-          Total
-        </Grid>
-      </Grid>
-      <Container sx={{ my: 0 }} maxWidth="xl">
-        {/* End hero unit */}
-        <Grid
+          xs={12}
+          sm
           container
-          spacing={7}
-          direction="row"
+          spacing={6}
           justifyContent="space-evenly"
-          alignItems="center"
           style={{ minHeight: "80vh" }}
         >
-          <Grid item xs={7} sm={7} md={7}></Grid>
           {cards.map((card) => (
             <Grid
               item
+              xs
+              container
+              direction="column"
+              spacing={2}
               key={card}
-              xs={7}
-              sm={7}
-              md={7}
+              md={10}
               style={{ maxHeight: "10%", maxWidth: "80%" }}
             >
               <Card
                 sx={{
-                  maxWidth: "100%",
-                  height: "20%",
+                  height: "15vh",
                   display: "flex",
-                  flexDirection: "column",
                   breakpoints: {
                     values: {
                       xs: 0,
@@ -117,69 +71,110 @@ export default function Orders() {
                   },
                 }}
               >
-                <CardMedia
-                  maxWidth="sm"
-                  component="img"
+                <ButtonBase
                   sx={{
-                    px: 3,
-                    py: 3,
-                    "&:hover": {
-                      width: "101%",
-                      height: "102%",
-                      transformOrigin: { horizontal: "center" },
-                    },
+                    width: 128,
+                    height: 128,
+                    margin: "auto",
+                    marginLeft: 3,
                   }}
-                  image="https://source.unsplash.com"
-                  alt="random"
+                >
+                  <Img
+                    alt="complex"
+                    src="https://source.unsplash.com/random"
+                    sx={{
+                      px: 3,
+                      py: 3,
+                      "&:hover": {
+                        transition: "transform 0.15s ease-in-out",
+                        transform: "scale3d(1.05, 1.05, 1)",
+                      },
+                    }}
+                  />
+                </ButtonBase>
+                <Box
+                  sx={{ flexGrow: 2, display: { xs: "none", md: "flex" } }}
                 />
                 <CardContent
                   sx={{
                     flexGrow: 1,
+                    display: { xs: "none", md: "flex" },
                   }}
                 >
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Product name
+                  <Typography
+                    item
+                    xs
+                    sx={{
+                      margin: "auto",
+                      marginLeft: 3,
+                    }}
+                  >
+                    about product Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Quia ab iste, impedit laborum incidunt
+                    quae dolor atque veniam quo eius sint totam maxime velit
+                    necessitatibus hic eveniet non temporibus dolore?
                   </Typography>
-                  <Typography>about product</Typography>
-                  <Typography>$price</Typography>
                 </CardContent>
                 <CardActions>
-                  <IconButton
+                  <Button
+                    item
                     size="large"
                     aria-label="add to shopping cart"
                     sx={{
+                      marginRight: "10%",
                       "&:hover": {
-                        bgcolor: "#DED1BD",
+                        background: "none",
                       },
                     }}
                   >
-                    <AddShoppingCartIcon
+                    <ClearIcon
+                      variant="body2"
                       sx={{
+                        marginRight: "1vw",
+                        border: "1px solid",
                         cursor: "pointer",
                         color: "#B08401",
                       }}
                     />
-                  </IconButton>
-                  <IconButton
-                    aria-label="add to favorites"
-                    // variant="plain"
-                    // color="danger"
+                  </Button>
+                  <Typography
                     sx={{
-                      "&:hover": {
-                        bgcolor: "#DED1BD",
-                      },
+                      flexGrow: 1,
+                      marginRight: "1vw",
+                      marginLeft: "-10%",
+                      display: { xs: "none", md: "flex" },
+                      width: "5vw",
                     }}
                   >
-                    <FavoriteIcon
+                    <TextField
                       sx={{
-                        cursor: "pointer",
-                        color: "#ff8a80",
-                        "&:hover": {
-                          borderColor: "purple",
-                        },
+                        textAlign: "center",
+                        flexGrow: 1,
+                        display: { xs: "none", md: "flex" },
+                      }}
+                      label="Quantity"
+                      focused
+                      inputProps={{
+                        inputMode: "numeric",
+                        pattern: "[0-9]*",
                       }}
                     />
-                  </IconButton>
+                  </Typography>
+                  <Typography
+                    sx={{
+                      flexGrow: 1,
+                      marginRight: "2vw",
+                      display: { xs: "none", md: "flex" },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        flexGrow: 1,
+                        display: { xs: "none", md: "flex" },
+                      }}
+                    />
+                    $20
+                  </Typography>
                 </CardActions>
               </Card>
             </Grid>

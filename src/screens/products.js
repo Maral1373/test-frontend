@@ -12,8 +12,8 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import CategoryIcon from "@mui/icons-material/Category";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import IconButton from "@mui/material/IconButton";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useTheme } from "@mui/material";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -197,9 +197,8 @@ export default function Products() {
                     px: 3,
                     py: 3,
                     "&:hover": {
-                      width: "101%",
-                      height: "102%",
-                      transformOrigin: { horizontal: "center" },
+                      transition: "transform 0.15s ease-in-out",
+                      transform: "scale3d(1.05, 1.05, 1)",
                     },
                   }}
                   image="https://source.unsplash.com/random"
