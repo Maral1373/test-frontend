@@ -11,24 +11,21 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useState } from "react";
+import api from "../api/api";
+import { setToken } from "../api/token";
 
 export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     registerUser();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-    });
   };
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
 
   const onChange = (e) => {
     if (e.target.name === "firstName") {
@@ -39,27 +36,32 @@ export default function SignUp() {
       setPassword(e.target.value);
     } else if (e.target.name === "email") {
       setEmail(e.target.value);
+    } else if (e.target.name === "address") {
+      setAddress(e.target.value);
+    } else if (e.target.name === "phone") {
+      setPhone(e.target.value);
     }
   };
 
   const registerUser = async () => {
-    const request = await fetch("http://127.0.0.1:3400/api/auth/register", {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      mode: "cors",
-      credentials: "include",
-      body: JSON.stringify({
+    try {
+      const res = await api.post(`/auth/register`, {
+        username: email,
         firstName,
         password,
         email,
         lastName,
-      }),
-    });
-    const result = await request.json();
-    console.log(result);
+        address,
+        phone,
+      });
+      console.log("data", res);
+      if (res.data.token) {
+        setToken(res.data.token);
+      }
+    } catch (e) {
+      console.log(e);
+      setToken(null);
+    }
   };
 
   return (
@@ -100,6 +102,28 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
+                onChange={onChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                fullWidth
+                id="address"
+                label="Address"
+                name="address"
+                autoComplete="address"
+                onChange={onChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                fullWidth
+                id="phone"
+                label="Phone"
+                name="phone"
+                autoComplete="phone"
                 onChange={onChange}
               />
             </Grid>
