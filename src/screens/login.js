@@ -34,6 +34,7 @@ export default function Login() {
         setToken(res.data.token);
       }
     } catch (e) {
+      setToken(null);
       console.log(e);
     }
   };
