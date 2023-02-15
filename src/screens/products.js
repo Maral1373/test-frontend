@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -15,11 +15,25 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useTheme } from "@mui/material";
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import api from "../api/api";
 
 export default function Products() {
   const theme = useTheme();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await api.get(`/catalog`);
+      setProducts(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <main>
       {/* Hero unit */}
@@ -39,7 +53,7 @@ export default function Products() {
           >
             <CardMedia
               component="img"
-              sx={{ pt: 4, maxWidth: "100vw" }}
+              sx={{ pt: 4, maxWidth: "60vw", maxHeight: "40vh" }}
               image="https://source.unsplash.com/random"
               alt="random"
             />
@@ -168,94 +182,107 @@ export default function Products() {
       <Container sx={{ my: 0 }} maxWidth="xl">
         {/* End hero unit */}
         <Grid container spacing={2}>
-          {cards.map((card) => (
-            <Grid item key={card} xs={12} sm={6} md={3}>
-              <Card
-                sx={{
-                  maxWidth: 345,
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  breakpoints: {
-                    values: {
-                      xs: 0,
-                      sm: 600,
-                      lg: 1200,
-                      xl: 1536,
-                    },
-                  },
-                  cursor: "pointer",
-                  "&:hover": {
-                    backgroundColor: "#FAF6F2",
-                  },
-                }}
-              >
-                <CardMedia
-                  maxWidth="sm"
-                  component="img"
+          {products.map((product) => {
+            console.log(product);
+            const {
+              photo,
+              name,
+              displaySize,
+              displayResolution,
+              cpu,
+              internalMemory,
+              ram,
+              camera,
+              price,
+            } = product.info;
+            return (
+              <Grid item key={product._id} xs={12} sm={6} md={3}>
+                <Card
                   sx={{
-                    px: 3,
-                    py: 3,
+                    maxWidth: 345,
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    breakpoints: {
+                      values: {
+                        xs: 0,
+                        sm: 600,
+                        lg: 1200,
+                        xl: 1536,
+                      },
+                    },
+                    cursor: "pointer",
                     "&:hover": {
-                      transition: "transform 0.15s ease-in-out",
-                      transform: "scale3d(1.05, 1.05, 1)",
+                      backgroundColor: "#FAF6F2",
                     },
-                  }}
-                  image="https://source.unsplash.com/random"
-                  alt="random"
-                />
-                <CardContent
-                  sx={{
-                    flexGrow: 1,
                   }}
                 >
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Product name
-                  </Typography>
-                  <Typography>about product</Typography>
-                  <Typography>$price</Typography>
-                </CardContent>
-                <CardActions>
-                  <IconButton
-                    size="large"
-                    aria-label="add to shopping cart"
+                  <CardMedia
+                    maxWidth="sm"
+                    component="img"
                     sx={{
+                      px: 3,
+                      py: 3,
                       "&:hover": {
-                        bgcolor: "#DED1BD",
+                        transition: "transform 0.15s ease-in-out",
+                        transform: "scale3d(1.05, 1.05, 1)",
                       },
                     }}
-                  >
-                    <AddShoppingCartIcon
-                      sx={{
-                        cursor: "pointer",
-                        color: "#B08401",
-                      }}
-                    />
-                  </IconButton>
-                  <IconButton
-                    aria-label="add to favorites"
-                    // variant="plain"
-                    // color="danger"
+                    image={photo}
+                  />
+                  <CardContent
                     sx={{
-                      "&:hover": {
-                        bgcolor: "#DED1BD",
-                      },
+                      flexGrow: 1,
                     }}
                   >
-                    <FavoriteIcon
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Product name
+                    </Typography>
+                    <Typography>about product</Typography>
+                    <Typography>$price</Typography>
+                  </CardContent>
+                  <CardActions>
+                    <IconButton
+                      size="large"
+                      aria-label="add to shopping cart"
                       sx={{
-                        cursor: "pointer",
-                        color: "#ff8a80",
                         "&:hover": {
-                          borderColor: "purple",
+                          bgcolor: "#DED1BD",
                         },
                       }}
-                    />
-                  </IconButton>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
+                    >
+                      <AddShoppingCartIcon
+                        sx={{
+                          cursor: "pointer",
+                          color: "#B08401",
+                        }}
+                      />
+                    </IconButton>
+                    <IconButton
+                      aria-label="add to favorites"
+                      // variant="plain"
+                      // color="danger"
+                      sx={{
+                        "&:hover": {
+                          bgcolor: "#DED1BD",
+                        },
+                      }}
+                    >
+                      <FavoriteIcon
+                        sx={{
+                          cursor: "pointer",
+                          color: "#ff8a80",
+                          "&:hover": {
+                            borderColor: "purple",
+                          },
+                        }}
+                      />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
     </main>
