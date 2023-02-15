@@ -94,7 +94,7 @@ export default function Products() {
             >
               <Avatar
                 sx={{
-                  bgcolor: "#DED1BD",
+                  bgcolor: "#F4C7AB",
                   marginBottom: "5",
                   height: "100px",
                   width: "100px",
@@ -131,7 +131,7 @@ export default function Products() {
             >
               <Avatar
                 sx={{
-                  bgcolor: "#683B2B",
+                  bgcolor: "#B2B8A3",
                   marginBottom: "5",
                   height: "100px",
                   width: "100px",
@@ -169,7 +169,7 @@ export default function Products() {
             >
               <Avatar
                 sx={{
-                  bgcolor: "#D49E8D",
+                  bgcolor: "#abcfd6",
                   marginBottom: "5",
                   height: "100px",
                   width: "100px",
@@ -235,7 +235,7 @@ export default function Products() {
                         },
                         cursor: "pointer",
                         "&:hover": {
-                          backgroundColor: "#FAF6F2",
+                          backgroundColor: "#FFF",
                         },
                       }}
                     >
@@ -275,14 +275,14 @@ export default function Products() {
                           aria-label="add to shopping cart"
                           sx={{
                             "&:hover": {
-                              bgcolor: "#DED1BD",
+                              bgcolor: "#FFF5EB",
                             },
                           }}
                         >
                           <AddShoppingCartIcon
                             sx={{
                               cursor: "pointer",
-                              color: "#B08401",
+                              color: "#d1936d",
                             }}
                           />
                         </IconButton>
@@ -292,7 +292,7 @@ export default function Products() {
                           // color="danger"
                           sx={{
                             "&:hover": {
-                              bgcolor: "#DED1BD",
+                              bgcolor: "#FFF5EB",
                             },
                           }}
                         >

@@ -119,7 +119,7 @@ function ResponsiveAppBar(props) {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <ShoppingBagOutlinedIcon
-            sx={{ display: { xs: "none", md: "flex" }, ml: 5 }}
+            sx={{ display: { xs: "none", md: "flex" }, mr: 5 }}
           />
           <Typography
             variant="h6"
@@ -131,7 +131,7 @@ function ResponsiveAppBar(props) {
               mr: 2,
               display: { xs: "none", md: "flex" },
               letterSpacing: "0.1rem",
-              color: "#FAF6F2",
+              color: "Black",
               textDecoration: "none",
               typography: {
                 fontFamily: `"EB Garamond", serif`,
@@ -181,7 +181,7 @@ function ResponsiveAppBar(props) {
                   sx={{
                     cursor: "pointer",
                     "&:hover": {
-                      backgroundColor: "#D49E8D",
+                      backgroundColor: "#DEEDF0",
                     },
                   }}
                 >
@@ -208,7 +208,7 @@ function ResponsiveAppBar(props) {
               fontFamily: "inherit",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "#FAF6F2",
+              color: "Black",
               textDecoration: "none",
             }}
           >
@@ -233,7 +233,7 @@ function ResponsiveAppBar(props) {
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
-                    color: "#FAF6F2",
+                    color: "Black",
                     display: "block",
                     "&:hover": {
                       backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -277,7 +277,7 @@ function ResponsiveAppBar(props) {
                   sx={{
                     cursor: "pointer",
                     "&:hover": {
-                      backgroundColor: "#D49E8D",
+                      backgroundColor: "#DEEDF0",
                     },
                   }}
                 >
