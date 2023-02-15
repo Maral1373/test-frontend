@@ -236,10 +236,16 @@ export default function Products() {
                     }}
                   >
                     <Typography gutterBottom variant="h5" component="h2">
-                      Product name
+                      {name}
                     </Typography>
-                    <Typography>about product</Typography>
-                    <Typography>$price</Typography>
+                    <Typography>{camera}</Typography>
+                    <Typography>
+                      {displaySize} ({displayResolution})
+                    </Typography>
+                    <Typography>{cpu}</Typography>
+                    <Typography>{ram} Ram</Typography>
+                    <Typography>{internalMemory} Storage</Typography>
+                    <Typography>{price}</Typography>
                   </CardContent>
                   <CardActions>
                     <IconButton
