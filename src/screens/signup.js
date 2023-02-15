@@ -13,8 +13,10 @@ import Container from "@mui/material/Container";
 import { useState } from "react";
 import api from "../api/api";
 import { setToken } from "../api/token";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     registerUser();
@@ -54,9 +56,9 @@ export default function SignUp() {
         address,
         phone,
       });
-      console.log("data", res);
       if (res.data.token) {
         setToken(res.data.token);
+        navigate("/products"); // redirect after successful login/register
       }
     } catch (e) {
       console.log(e);

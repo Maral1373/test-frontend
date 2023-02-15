@@ -13,9 +13,11 @@ import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import api from "../api/api";
 import { setToken } from "../api/token";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,6 +34,7 @@ export default function Login() {
       });
       if (res.data.token) {
         setToken(res.data.token);
+        navigate("/products"); // redirect after successful login/register
       }
     } catch (e) {
       setToken(null);
