@@ -17,6 +17,7 @@ import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { useTheme } from "@mui/material";
+import { getToken } from "../api/token";
 
 import { Link } from "react-router-dom";
 
@@ -35,12 +36,12 @@ const pages = [
   },
 ];
 const settings = [
-  { title: "Sign in", link: "login" },
-  { title: "Sign up", link: "signup" },
-  { title: "Forgot Password", link: "forgot" },
-  { title: "Profile", link: "profile" },
-  { title: "Orders", link: "orders" },
-  { title: "Logout", link: "logout" },
+  { title: "Sign in", link: "login", private: false },
+  { title: "Sign up", link: "signup", private: false },
+  { title: "Forgot Password", link: "forgot", private: false },
+  { title: "Profile", link: "profile", private: true },
+  { title: "Orders", link: "orders", private: true },
+  { title: "Logout", link: "logout", private: true },
 ];
 
 const SiteName = "Maral's mobile shop";
@@ -107,6 +108,11 @@ function ResponsiveAppBar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const isLoggedIn = typeof getToken() === "string";
+  const settingItemsToShow = isLoggedIn
+    ? settings.filter((s) => s.private)
+    : settings.filter((s) => !s.private);
 
   return (
     <AppBar position="fixed" color="primary">
@@ -264,9 +270,9 @@ function ResponsiveAppBar(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {settingItemsToShow.map((setting) => (
                 <MenuItem
-                  key={setting}
+                  key={setting.title}
                   onClick={handleCloseUserMenu}
                   sx={{
                     cursor: "pointer",
