@@ -32,6 +32,7 @@ export default function Login() {
         email,
         password,
       });
+      console.log(res.data);
       if (res.data.token) {
         setToken(res.data.token);
         navigate("/products"); // redirect after successful login/register
