@@ -67,7 +67,7 @@ export default function Orders() {
                   },
                   cursor: "pointer",
                   "&:hover": {
-                    backgroundColor: "#FAF6F2",
+                    backgroundColor: "#FFF",
                   },
                 }}
               >
@@ -133,7 +133,7 @@ export default function Orders() {
                         marginRight: "1vw",
                         border: "1px solid",
                         cursor: "pointer",
-                        color: "#B08401",
+                        color: "#B2B8A3",
                       }}
                     />
                   </Button>

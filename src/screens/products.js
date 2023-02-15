@@ -18,6 +18,7 @@ import { useTheme } from "@mui/material";
 import api from "../api/api";
 import { styled } from "@mui/material/styles";
 import FiltersList from "../components/FilterList";
+import { Block } from "@mui/icons-material";
 
 const Flex = styled("div")(({ theme }) => ({
   display: "flex",
@@ -57,11 +58,12 @@ export default function Products() {
       <Box
         sx={{
           bgcolor: "background.paper",
+          width: "100%",
           pb: 6,
           pt: 4,
         }}
       >
-        <Container maxWidth="100vw">
+        <Box maxWidth="1">
           <Typography
             variant="h5"
             align="center"
@@ -70,11 +72,19 @@ export default function Products() {
           >
             <CardMedia
               component="img"
-              sx={{ pt: 4, maxWidth: "60vw", maxHeight: "40vh" }}
-              image="https://source.unsplash.com/random"
-              alt="random"
+              sx={{
+                mt: "-33px",
+                maxWidth: "100%",
+                maxHeight: "40vh",
+                width: "100%",
+                objectFit: "fill",
+              }}
+              src="https://thumbs.dreamstime.com/b/smartphone-headphones-office-accessories-yellow-background-modern-lifestyle-business-flat-lay-banner-copy-space-176172776.jpg"
+              // src="https://thumbs.dreamstime.com/b/smartphone-office-accessories-yellow-background-modern-lifestyle-business-flat-lay-banner-copy-space-176172335.jpg"
+              alt="header"
             />
           </Typography>
+
           <Grid
             container
             sx={{
@@ -194,7 +204,7 @@ export default function Products() {
               </Box>
             </Grid>
           </Grid>
-        </Container>
+        </Box>
       </Box>
       <Flex>
         <Left>
@@ -257,7 +267,12 @@ export default function Products() {
                           flexGrow: 1,
                         }}
                       >
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography
+                          gutterBottom
+                          variant="h5"
+                          fontWeight={"bold"}
+                          component="h2"
+                        >
                           {name}
                         </Typography>
                         <Typography>{camera}</Typography>

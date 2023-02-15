@@ -134,8 +134,8 @@ function ResponsiveAppBar(props) {
               color: "Black",
               textDecoration: "none",
               typography: {
-                fontFamily: `"EB Garamond", serif`,
-                fontSize: 14,
+                fontFamily: `"Open Sans", sons-serif`,
+                fontSize: 20,
                 fontWeight: 700,
               },
             }}

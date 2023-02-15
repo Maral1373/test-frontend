@@ -11,27 +11,15 @@ const theme = createTheme({
     main: "#DEEDF0",
   },
   typography: {
-    fontFamily: `"EB Garamond", serif`,
+    fontFamily: `"Open Sans", sons-serif`,
+    fontSize: 16,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    poster: {
+      color: "red",
+    },
   },
-  // typography: {
-  //   // fontFamily: `"Indie Flower", cursive`,
-  //   fontFamily: "serif",
-  //   fontSize: 14,
-  //   fontWeightLight: 300,
-  //   fontWeightRegular: 400,
-  //   fontWeightMedium: 500,
-  //   poster: {
-  //     color: "red",
-  //   },
-  // },
 });
 
 export default theme;
-
-// C O L O R S
-
-//  #B08401
-//  #683B2B
-//  #FAF6F2
-//  #D49E8D
-//  #DED1BD
