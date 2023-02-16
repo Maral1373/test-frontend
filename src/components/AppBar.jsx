@@ -44,7 +44,7 @@ const settings = [
   { title: "Profile", link: "profile", private: true },
   { title: "Orders", link: "orders", private: true },
   { title: "Logout", link: "logout", private: true },
-  { title: "Basket", link: "orders", private: true },
+  { title: "Basket", link: "basket", private: true },
 ];
 
 const SiteName = "Maral's mobile shop";
