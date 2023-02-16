@@ -36,26 +36,10 @@ const Right = styled("div")(({ theme }) => ({
   flex: 3,
 }));
 
-const filtersInitialState = {
-  checked: [],
-  filters: {
-    brand: [],
-    camera: [],
-    color: [],
-    cpu: [],
-    displayResolution: [],
-    displaySize: [],
-    internalMemory: [],
-    os: [],
-    priceRange: [],
-    ram: [],
-  },
-};
-
 export default function Products() {
   const theme = useTheme();
   const [products, setProducts] = useState([]);
-  const [filters, setFilters] = useState(filtersInitialState);
+  const [filters, setFilters] = useState({});
 
   useEffect(() => {
     fetchProducts();
@@ -72,23 +56,11 @@ export default function Products() {
 
   const setFilter = (filterType, filterValue) => {
     const newState = { ...filters };
-
-    if (newState.filters[filterType].includes(filterValue)) {
-      newState.filters[filterType] = newState.filters[filterType].filter(
-        (item) => item !== filterValue
-      );
-      newState.checked = newState.checked.filter(
-        (item) => item !== filterValue
-      );
-    } else {
-      newState.filters[filterType].push(filterValue);
-      newState.checked.push(filterValue);
-    }
-
+    newState[filterType] = filterValue;
     setFilters(newState);
   };
 
-  const clearFilters = () => setFilters(filtersInitialState);
+  const clearFilters = () => setFilters({});
 
   console.log("filters", filters);
 
@@ -248,18 +220,13 @@ export default function Products() {
       </Box>
       <Flex>
         <Left>
-          <FiltersList
-            products={products}
-            filters={filters}
-            setFilter={setFilter}
-          />
+          <FiltersList setFilter={setFilter} />
         </Left>
         <Right>
           <Container sx={{ my: 0 }} maxWidth="xl">
             {/* End hero unit */}
             <Grid container spacing={2}>
               {products.map((product) => {
-                console.log(product);
                 const {
                   photo,
                   name,

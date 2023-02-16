@@ -22,7 +22,7 @@ const CheckboxList = ({ name, options, onChange }) => {
     }
 
     setChecked(newChecked);
-    onChange(checked);
+    onChange(name, newChecked);
   };
 
   return (
