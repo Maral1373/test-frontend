@@ -10,11 +10,12 @@ import Contact from "./screens/contact";
 import Products from "./screens/products";
 import About from "./screens/about";
 import Profile from "./screens/profile";
-import Orders from "./screens/orders";
+import Basket from "./screens/basket";
 import Logout from "./screens/logout";
 import Login from "./screens/login";
 import Signup from "./screens/signup";
 import Forgot from "./screens/forgot";
+import Orders from "./screens/orders";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <Orders />,
+      },
+      {
+        path: "basket",
+        element: <Basket />,
       },
       {
         path: "logout",

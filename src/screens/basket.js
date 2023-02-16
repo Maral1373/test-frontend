@@ -24,8 +24,7 @@ export default function Basket() {
   const theme = useTheme();
   return (
     <main>
-      orders
-      {/* <Container
+      <Container
         sx={{
           p: 9,
           margin: "auto",
@@ -181,7 +180,7 @@ export default function Basket() {
             </Grid>
           ))}
         </Grid>
-     </Container> */}
+      </Container>
     </main>
   );
 }
