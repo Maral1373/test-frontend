@@ -8,6 +8,7 @@ import Layout from "./screens/layout";
 import ErrorPage from "./screens/error-page";
 import Contact from "./screens/contact";
 import Products from "./screens/products";
+import ProductDetails from "./screens/productDetails";
 import About from "./screens/about";
 import Profile from "./screens/profile";
 import Basket from "./screens/basket";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "products/:productId",
+        element: <ProductDetails />,
       },
       {
         path: "about",
