@@ -36,9 +36,26 @@ const Right = styled("div")(({ theme }) => ({
   flex: 3,
 }));
 
+const filtersInitialState = {
+  checked: [],
+  filters: {
+    brand: [],
+    camera: [],
+    color: [],
+    cpu: [],
+    displayResolution: [],
+    displaySize: [],
+    internalMemory: [],
+    os: [],
+    priceRange: [],
+    ram: [],
+  },
+};
+
 export default function Products() {
   const theme = useTheme();
   const [products, setProducts] = useState([]);
+  const [filters, setFilters] = useState(filtersInitialState);
 
   useEffect(() => {
     fetchProducts();
@@ -52,6 +69,28 @@ export default function Products() {
       console.log(e);
     }
   };
+
+  const setFilter = (filterType, filterValue) => {
+    const newState = { ...filters };
+
+    if (newState.filters[filterType].includes(filterValue)) {
+      newState.filters[filterType] = newState.filters[filterType].filter(
+        (item) => item !== filterValue
+      );
+      newState.checked = newState.checked.filter(
+        (item) => item !== filterValue
+      );
+    } else {
+      newState.filters[filterType].push(filterValue);
+      newState.checked.push(filterValue);
+    }
+
+    setFilters(newState);
+  };
+
+  const clearFilters = () => setFilters(filtersInitialState);
+
+  console.log("filters", filters);
 
   return (
     <main>
@@ -209,7 +248,11 @@ export default function Products() {
       </Box>
       <Flex>
         <Left>
-          <FiltersList />
+          <FiltersList
+            products={products}
+            filters={filters}
+            setFilter={setFilter}
+          />
         </Left>
         <Right>
           <Container sx={{ my: 0 }} maxWidth="xl">
@@ -229,11 +272,11 @@ export default function Products() {
                   price,
                 } = product.info;
                 return (
-                  <Link
-                    to={`/products/${product._id}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Grid item key={product._id} xs={12} sm={6} md={3}>
+                  <Grid item key={product._id} xs={12} sm={6} md={3}>
+                    <Link
+                      to={`/products/${product._id}`}
+                      style={{ textDecoration: "none" }}
+                    >
                       <Card
                         sx={{
                           maxWidth: 345,
@@ -328,8 +371,8 @@ export default function Products() {
                           </IconButton>
                         </CardActions>
                       </Card>
-                    </Grid>
-                  </Link>
+                    </Link>
+                  </Grid>
                 );
               })}
             </Grid>
