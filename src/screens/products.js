@@ -18,8 +18,9 @@ import { useTheme } from "@mui/material";
 import api from "../api/api";
 import { styled } from "@mui/material/styles";
 import FiltersList from "../components/FilterList";
-import { Block } from "@mui/icons-material";
+import { Block, ControlPointDuplicateRounded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { filtersInitialState, filterProducts } from "../utils/utils";
 
 const Flex = styled("div")(({ theme }) => ({
   display: "flex",
@@ -39,7 +40,7 @@ const Right = styled("div")(({ theme }) => ({
 export default function Products() {
   const theme = useTheme();
   const [products, setProducts] = useState([]);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState(filtersInitialState);
 
   useEffect(() => {
     fetchProducts();
@@ -48,7 +49,7 @@ export default function Products() {
   const fetchProducts = async () => {
     try {
       const response = await api.get(`/catalog`);
-      setProducts(response.data);
+      setProducts(response.data || []);
     } catch (e) {
       console.log(e);
     }
@@ -60,9 +61,9 @@ export default function Products() {
     setFilters(newState);
   };
 
-  const clearFilters = () => setFilters({});
+  const clearFilters = () => setFilters(filtersInitialState);
 
-  console.log("filters", filters);
+  const filteredProducts = filterProducts(products, filters);
 
   return (
     <main>
@@ -110,8 +111,8 @@ export default function Products() {
               sm={6}
               md={3}
               sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
+              // direction="row"
+              // spacing={2}
               justifyContent="center"
             >
               <Avatar
@@ -147,8 +148,8 @@ export default function Products() {
               sm={6}
               md={3}
               sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
+              // direction="row"
+              // spacing={2}
               justifyContent="center"
             >
               <Avatar
@@ -185,8 +186,8 @@ export default function Products() {
               sm={6}
               md={3}
               sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
+              // direction="row"
+              // spacing={2}
               justifyContent="center"
             >
               <Avatar
@@ -226,7 +227,7 @@ export default function Products() {
           <Container sx={{ my: 0 }} maxWidth="xl">
             {/* End hero unit */}
             <Grid container spacing={2}>
-              {products.map((product) => {
+              {filteredProducts.map((product) => {
                 const {
                   photo,
                   name,

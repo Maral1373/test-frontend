@@ -225,7 +225,11 @@ function ResponsiveAppBar(props) {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
           <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link to={page.link} style={{ textDecoration: "none" }}>
+              <Link
+                key={page.title}
+                to={page.link}
+                style={{ textDecoration: "none" }}
+              >
                 {/** change styling here, remove underline for links */}
                 <Button
                   key={page.title}
