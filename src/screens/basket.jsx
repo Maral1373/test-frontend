@@ -124,7 +124,7 @@ const Cart = () => {
                 <tbody>
                   {cart.items.map((item) => (
                     <tr key={item.product.info.name}>
-                      <td>
+                      <td className="cart-hover">
                         <img src={item.product.info.photo} />
                       </td>
                       <td>

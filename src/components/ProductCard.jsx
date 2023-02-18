@@ -42,13 +42,13 @@ export const ProductCard = ({ addToCart, addToFavorite, product }) => {
           },
           cursor: "pointer",
           "&:hover": {
-            backgroundColor: "#FFF",
+            backgroundColor: "#DEEDF0",
           },
         }}
       >
         <Link
           to={`/products/${product._id}`}
-          style={{ textDecoration: "none" }} // @maral fix link color
+          style={{ textDecoration: "none", color: "black" }} // @maral fix link color
         >
           <CardMedia
             maxWidth="sm"

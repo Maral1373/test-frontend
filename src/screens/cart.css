@@ -31,7 +31,7 @@
 
 .cart-info .total {
   font-size: 22px;
-  color: #64dd17;
+  color: #5ea9a1;
 }
 
 .cart-info .btns {
@@ -48,7 +48,7 @@
 }
 
 .cart-items img {
-  max-width: 50px;
+  max-height: 80px;
 }
 
 .cart-items table {
@@ -57,10 +57,16 @@
 }
 
 .cart-items th {
+
   padding: 5px 5px;
-  background-color: #00bcd4;
-  color: white;
+  background-color: #F4C7AB;
+  color: #292f33;
   text-align: left;
+}
+
+.cart-hover:hover {
+  transition: transform 0.15s ease-in-out;
+  transform: scale3d(1.05, 1.05, 1);
 }
 
 .cart-items th:first-child {
@@ -72,14 +78,15 @@
 }
 
 .cart-items td {
-  padding: 12px 5px;
+  padding: 15px 5px;
   text-align: left;
-  border-bottom: 1px solid #00bcd4;
+  border-bottom: 1px solid #F4C7AB;
 }
 
 .cart-items td:nth-child(4) {
   text-align: center;
 }
+
 
 .cart-items a {
   color: inherit;

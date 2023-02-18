@@ -9,7 +9,7 @@ import CollapsibleListItem from "./CollapsibleListItem";
 const FiltersList = ({ setFilter }) => {
   return (
     <List
-      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+      sx={{ width: "100%", maxWidth: 360, bgcolor: "#f7dccb" }}
       component="nav"
       aria-labelledby="search-by"
       subheader={
