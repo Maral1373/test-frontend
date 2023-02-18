@@ -48,7 +48,7 @@ export const ProductCard = ({ addToCart, addToFavorite, product }) => {
       >
         <Link
           to={`/products/${product._id}`}
-          style={{ textDecoration: "none", color: "black" }} // @maral fix link color
+          style={{ textDecoration: "none", color: "black" }}
         >
           <CardMedia
             maxWidth="sm"
