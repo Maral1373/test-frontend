@@ -38,8 +38,10 @@ export default function ProductDetails() {
   }, []);
 
   const initialize = async () => {
+    if (!productId) return;
     try {
-      const response = fetchProduct();
+      const response = await fetchProduct(productId);
+      console.log("prod dts response", response);
       setProduct(response.data.info);
     } catch (e) {
       console.log(e);

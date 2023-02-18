@@ -12,8 +12,10 @@ export const addToCart = async (product) => {
     if (response.status === 200) {
       alert("Item added to your cart successfully");
     }
+    return Promise.resolve();
   } catch (e) {
     console.log(e);
+    return Promise.reject(e);
   }
 };
 export const addToFavorite = async () => {
@@ -41,17 +43,18 @@ export const registerUser = async ({
     });
     if (res.data.token) {
       setToken(res.data.token);
-      callback();
+      return callback();
     }
   } catch (e) {
     console.log(e);
     setToken(null);
+    return Promise.reject(e);
   }
 };
 
 export const fetchProducts = async () => {
   try {
-    return await http.get(`/catalog`);
+    return http.get(`/catalog`);
   } catch (e) {
     console.log(e);
   }
@@ -59,7 +62,7 @@ export const fetchProducts = async () => {
 
 export const fetchProduct = async (productId) => {
   try {
-    return await http.get(`/catalog/${productId}`);
+    return http.get(`/catalog/${productId}`);
   } catch (e) {
     console.log(e);
   }
@@ -67,7 +70,7 @@ export const fetchProduct = async (productId) => {
 
 export const getCart = async (productId) => {
   try {
-    return await http.get(`/cart`);
+    return http.get(`/cart`);
   } catch (e) {
     console.log(e);
   }
@@ -81,10 +84,11 @@ export const loginUser = async (email, password, callback) => {
     });
     if (res.data.token) {
       setToken(res.data.token);
-      callback();
+      return callback();
     }
   } catch (e) {
     setToken(null);
     console.log(e);
+    return Promise.reject(e);
   }
 };

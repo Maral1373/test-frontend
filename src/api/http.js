@@ -20,9 +20,13 @@ instance.interceptors.response.use(
     return response;
   },
   function (error) {
-    if (error.response.status === 401 || error.response.status === 403) {
-      removeToken();
+    if (error.reponse) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        console.error("Oh Oh, oopsi happened 401 or 403", error.response);
+        removeToken();
+      }
     }
+    return error;
   }
 );
 

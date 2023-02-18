@@ -41,7 +41,7 @@ export default function Products() {
 
   const initialize = async () => {
     try {
-      const prods = fetchProducts();
+      const prods = await fetchProducts();
       setProducts(prods.data || []);
     } catch (e) {
       console.log(e);
