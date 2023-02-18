@@ -17,9 +17,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { useTheme } from "@mui/material";
 import { getToken } from "../api/token";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import { SITE_NAME } from "../consts/consts";
 
 import { Link } from "react-router-dom";
+import { BasketIcon } from "./BasketIcon";
 
 const pages = [
   {
@@ -45,8 +46,6 @@ const settings = [
   { title: "Logout", link: "logout", private: true },
   { title: "Basket", link: "basket", private: true },
 ];
-
-const SiteName = "Maral's mobile shop";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -142,7 +141,7 @@ function ResponsiveAppBar(props) {
               },
             }}
           >
-            {SiteName}
+            {SITE_NAME}
           </Typography>
           {/* menu phone */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -211,7 +210,7 @@ function ResponsiveAppBar(props) {
               textDecoration: "none",
             }}
           >
-            {SiteName}
+            {SITE_NAME}
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -248,13 +247,8 @@ function ResponsiveAppBar(props) {
               </Link>
             ))}
           </Box>
-          <ShoppingBasketIcon
-            sx={{
-              ml: 5,
-              color: "black",
-              cursor: "pointer",
-            }}
-          ></ShoppingBasketIcon>
+          <BasketIcon />
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton

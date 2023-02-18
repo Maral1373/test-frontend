@@ -11,8 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
-import api from "../api/api";
-import { setToken } from "../api/token";
+import { loginUser } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -23,24 +22,9 @@ export default function Login() {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
-    loginUser(data.get("email"), data.get("password"));
-  };
-
-  const loginUser = async (email, password) => {
-    try {
-      const res = await api.post(`/auth/login`, {
-        email,
-        password,
-      });
-      console.log(res.data);
-      if (res.data.token) {
-        setToken(res.data.token);
-        navigate("/products"); // redirect after successful login/register
-      }
-    } catch (e) {
-      setToken(null);
-      console.log(e);
-    }
+    loginUser(data.get("email"), data.get("password"), () =>
+      navigate("/products")
+    );
   };
 
   return (

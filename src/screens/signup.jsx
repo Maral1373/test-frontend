@@ -11,15 +11,22 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useState } from "react";
-import api from "../api/api";
-import { setToken } from "../api/token";
+import { registerUser } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-    registerUser();
+    registerUser({
+      email,
+      firstName,
+      password,
+      lastName,
+      address,
+      phone,
+      callback: () => navigate("/products"),
+    });
   };
 
   const [firstName, setFirstName] = useState("");
@@ -42,27 +49,6 @@ export default function SignUp() {
       setAddress(e.target.value);
     } else if (e.target.name === "phone") {
       setPhone(e.target.value);
-    }
-  };
-
-  const registerUser = async () => {
-    try {
-      const res = await api.post(`/auth/register`, {
-        username: email,
-        firstName,
-        password,
-        email,
-        lastName,
-        address,
-        phone,
-      });
-      if (res.data.token) {
-        setToken(res.data.token);
-        navigate("/products"); // redirect after successful login/register
-      }
-    } catch (e) {
-      console.log(e);
-      setToken(null);
     }
   };
 

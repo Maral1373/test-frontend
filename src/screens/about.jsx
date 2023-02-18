@@ -5,6 +5,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import LanguageIcon from "@mui/icons-material/Language";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 const useStyles = styled((theme) => ({
   root: {
@@ -140,7 +141,7 @@ export default function About() {
   }
 
   return (
-    <div className={classes.root}>
+    <Container sx={{ my: 0 }} maxWidth="xl">
       <Grid container spacing={6}>
         <Grid container item xs={12}>
           <Box fontWeight="fontWeightLight" m={1}></Box>
@@ -154,6 +155,6 @@ export default function About() {
           <FormRowTwo />
         </Grid>
       </Grid>
-    </div>
+    </Container>
   );
 }
