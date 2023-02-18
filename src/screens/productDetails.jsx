@@ -12,6 +12,7 @@ import { useTheme } from "@mui/material";
 import { fetchProduct, addToCart, addToFavorite } from "../api/api";
 import { useParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import Loading from "../components/Loading";
 
 const Flex = styled("div")(({ theme }) => ({
   display: "flex",
@@ -30,7 +31,7 @@ const Right = styled("div")(({ theme }) => ({
 
 export default function ProductDetails() {
   const theme = useTheme();
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
   const { productId } = useParams();
 
   useEffect(() => {
@@ -51,7 +52,9 @@ export default function ProductDetails() {
   return (
     <main>
       <Container sx={{ my: 0 }} maxWidth="xl">
-        {product.name && (
+        {!product ? (
+          <Loading />
+        ) : (
           <Card>
             <Flex>
               <Left>

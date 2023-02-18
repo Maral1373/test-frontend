@@ -14,6 +14,7 @@ import { styled } from "@mui/material/styles";
 import FiltersList from "../components/FilterList";
 import { filtersInitialState, filterProducts } from "../utils/utils";
 import { ProductCard } from "../components/ProductCard";
+import Loading from "../components/Loading";
 
 const Flex = styled("div")(({ theme }) => ({
   display: "flex",
@@ -32,7 +33,7 @@ const Right = styled("div")(({ theme }) => ({
 
 export default function Products() {
   const theme = useTheme();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   const [filters, setFilters] = useState(filtersInitialState);
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export default function Products() {
 
   const clearFilters = () => setFilters(filtersInitialState);
 
-  const filteredProducts = filterProducts(products, filters);
+  const filteredProducts = products ? filterProducts(products, filters) : null;
 
   return (
     <main>
@@ -220,13 +221,17 @@ export default function Products() {
           <Container sx={{ my: 0 }} maxWidth="xl">
             {/* End hero unit */}
             <Grid container spacing={2}>
-              {filteredProducts.map((product) => (
-                <ProductCard
-                  addToCart={addToCart}
-                  addToFavorite={addToFavorite}
-                  product={product}
-                />
-              ))}
+              {filteredProducts ? (
+                filteredProducts.map((product) => (
+                  <ProductCard
+                    addToCart={addToCart}
+                    addToFavorite={addToFavorite}
+                    product={product}
+                  />
+                ))
+              ) : (
+                <Loading />
+              )}
             </Grid>
           </Container>
         </Right>

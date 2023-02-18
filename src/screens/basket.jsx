@@ -55,10 +55,6 @@ const Cart = () => {
     await emptyCart();
   };
 
-  useEffect(() => {
-    getCart();
-  }, []);
-
   const cartExists = cart._id !== "undefined" && cart.items.length > 0;
 
   return (

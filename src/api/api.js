@@ -92,3 +92,11 @@ export const loginUser = async (email, password, callback) => {
     return Promise.reject(e);
   }
 };
+
+export const getUser = async () => {
+  try {
+    return http.get(`/user`);
+  } catch (e) {
+    console.log(e);
+  }
+};
