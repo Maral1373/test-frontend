@@ -4,10 +4,8 @@ import "./loading.css";
 
 const Loading = () => {
   return (
-    <div className="loader">
-      <img src="/img/loader.gif" />
-      <h1>Loading...</h1>
-    </div>
+    <div class='pac-man' />
+    
   );
 };
 
