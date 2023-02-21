@@ -7,12 +7,12 @@ const CarouselComponent = () => {
     {
       image:
         "https://thumbs.dreamstime.com/b/smartphone-headphones-office-accessories-yellow-background-modern-lifestyle-business-flat-lay-banner-copy-space-176172776.jpg",
-      caption: "San Francisco",
+      caption: "Text will come soon... 1",
     },
     {
       image:
         "https://thumbs.dreamstime.com/b/smartphone-office-accessories-yellow-background-modern-lifestyle-business-flat-lay-banner-copy-space-176172335.jpg",
-      caption: "Scotland",
+      caption: "Text will come soon... 2",
     },
   ];
 
