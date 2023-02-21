@@ -61,7 +61,6 @@ export default function Products() {
 
   return (
     <main>
-      {/* Hero unit */}
       <Box
         sx={{
           bgcolor: "background.paper",
@@ -92,121 +91,83 @@ export default function Products() {
             />
           </Typography>
 
-          <Grid
-            container
-            sx={{
-              marginLeft: "5%",
-              maxWidth: "100vw",
-            }}
-          >
+          <Grid container>
             <Grid
               item
               xs={12}
-              sm={6}
-              md={3}
-              sx={{ pt: 4 }}
-              // direction="row"
-              // spacing={2}
-              justifyContent="center"
+              sm={4}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                pt: 4,
+              }}
             >
               <Avatar
                 sx={{
                   bgcolor: "#F4C7AB",
-                  marginBottom: "5",
                   height: "100px",
                   width: "100px",
-                  display: "flex",
-                  flexDirection: "column",
-                  margin: "auto",
-                  marginRight: "10%",
                 }}
                 item
-                xs={4}
               >
                 <LocalShippingOutlinedIcon fontSize="large" />
               </Avatar>
-              <Box
-                item
-                xs={4}
-                marginBottom={5}
-                textAlign={"center"}
-                marginLeft={"63%"}
-                marginTop={"5%"}
-              >
+              <Box item textAlign={"center"} sx={{ pt: 2 }}>
                 Free shipping up to $50
               </Box>
             </Grid>
             <Grid
               item
               xs={12}
-              sm={6}
-              md={3}
-              sx={{ pt: 4 }}
-              // direction="row"
-              // spacing={2}
-              justifyContent="center"
+              sm={4}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                pt: 4,
+              }}
             >
               <Avatar
                 sx={{
                   bgcolor: "#B2B8A3",
-                  marginBottom: "5",
                   height: "100px",
                   width: "100px",
-                  display: "flex",
-                  flexDirection: "column",
-                  margin: "auto",
-                  marginRight: "10%",
                 }}
                 item
-                xs={4}
               >
                 <CategoryIcon fontSize="large" />
               </Avatar>
 
-              <Box
-                item
-                xs={4}
-                marginBottom={5}
-                textAlign={"center"}
-                marginLeft={"63%"}
-                marginTop={"5%"}
-              >
+              <Box item textAlign={"center"} sx={{ pt: 2 }}>
                 Product well package
               </Box>
             </Grid>
             <Grid
               item
               xs={12}
-              sm={6}
-              md={3}
-              sx={{ pt: 4 }}
-              // direction="row"
-              // spacing={2}
-              justifyContent="center"
+              sm={4}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                pt: 4,
+              }}
             >
               <Avatar
                 sx={{
                   bgcolor: "#abcfd6",
-                  marginBottom: "5",
                   height: "100px",
                   width: "100px",
-                  display: "flex",
-                  flexDirection: "column",
-                  margin: "auto",
-                  marginRight: "10%",
                 }}
                 item
-                xs={4}
               >
                 <SupportAgentIcon fontSize="large" />
               </Avatar>
-              <Box
-                item
-                xs={12}
-                textAlign={"center"}
-                marginLeft={"63%"}
-                marginTop={"5%"}
-              >
+              <Box item textAlign={"center"} sx={{ pt: 2 }}>
                 Support
               </Box>
             </Grid>
@@ -219,7 +180,6 @@ export default function Products() {
         </Left>
         <Right>
           <Container sx={{ my: 0 }} maxWidth="xl">
-            {/* End hero unit */}
             <Grid container spacing={2}>
               {filteredProducts ? (
                 filteredProducts.map((product) => (
