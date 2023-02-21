@@ -18,7 +18,13 @@ const Cart = () => {
 
   const initialize = async () => {
     const cart = await getCart();
-    setCart(cart.data);
+    if (cart.status === 200 && cart.data.items) {
+      // filtering because of a problem in backend. some items doesn't have the product key. will fix later.
+      setCart({
+        ...cart.data,
+        items: cart.data.items.filter((j) => !!j.product),
+      });
+    }
   };
 
   const deleteCart = async () => {};
@@ -91,7 +97,6 @@ const Cart = () => {
                 onClick={() => {}}
                 className="btn"
                 label="Checkout"
-                labelPosition="before"
                 icon={<NavigateNext />}
                 primary={true}
                 disabled={!cartExists}
@@ -101,7 +106,6 @@ const Cart = () => {
                 onClick={() => {}}
                 className="btn"
                 label="Empty cart"
-                labelPosition="before"
                 icon={<RemoveShoppingCart />}
                 secondary={true}
                 disabled={!cartExists}
