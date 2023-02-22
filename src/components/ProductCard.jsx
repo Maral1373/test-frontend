@@ -51,7 +51,6 @@ export const ProductCard = ({ addToCart, addToFavorite, product }) => {
           style={{ textDecoration: "none", color: "black" }}
         >
           <CardMedia
-            maxWidth="sm"
             component="img"
             sx={{
               px: 3,

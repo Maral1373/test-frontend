@@ -76,6 +76,7 @@ export default function Products() {
               {filteredProducts ? (
                 filteredProducts.map((product) => (
                   <ProductCard
+                    key={product._id}
                     addToCart={addToCart}
                     addToFavorite={addToFavorite}
                     product={product}

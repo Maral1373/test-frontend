@@ -34,7 +34,7 @@ const CheckboxList = ({ name, options, onChange }) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <ListItem key={value} disablePadding>
+          <ListItem key={label} disablePadding>
             <ListItemButton
               role={undefined}
               onClick={handleToggle(value)}

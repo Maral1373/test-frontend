@@ -42,7 +42,6 @@ export default function ProductDetails() {
     if (!productId) return;
     try {
       const response = await fetchProduct(productId);
-      console.log("prod dts response", response);
       setProduct(response.data.info);
     } catch (e) {
       console.log(e);

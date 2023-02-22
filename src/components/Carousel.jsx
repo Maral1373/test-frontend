@@ -1,5 +1,4 @@
 import React from "react";
-// import CardMedia from "@mui/material/CardMedia";
 import { Carousel } from "react-carousel-minimal";
 
 const CarouselComponent = () => {

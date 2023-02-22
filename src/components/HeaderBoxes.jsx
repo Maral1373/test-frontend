@@ -27,6 +27,7 @@ export default function HeaderBoxes() {
         },
       ].map((content) => (
         <Grid
+          key={content.text}
           item
           xs={12}
           sm={4}
@@ -45,11 +46,15 @@ export default function HeaderBoxes() {
               width: "100px",
               ...content.avatarStyles,
             }}
-            item
+            // item
           >
             {content.avatar}
           </Avatar>
-          <Box item textAlign={"center"} sx={{ pt: 2 }}>
+          <Box
+            //item
+            textAlign={"center"}
+            sx={{ pt: 2 }}
+          >
             {content.text}
           </Box>
         </Grid>
