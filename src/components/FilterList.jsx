@@ -9,7 +9,7 @@ import CollapsibleListItem from "./CollapsibleListItem";
 const FiltersList = ({ setFilter }) => {
   return (
     <List
-      sx={{ width: "100%", maxWidth: 360, bgcolor: "#f7dccb" }}
+      sx={{ width: "100%", bgcolor: "#f7dccb" }}
       component="nav"
       aria-labelledby="search-by"
       subheader={
@@ -18,7 +18,7 @@ const FiltersList = ({ setFilter }) => {
         </ListSubheader>
       }
     >
-      <CollapsibleListItem title="Price">
+      <CollapsibleListItem isOpen={true} title="Price">
         <CheckboxList
           name="priceRange"
           options={[

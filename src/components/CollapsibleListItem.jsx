@@ -6,8 +6,8 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
-const CollapsibleListItem = ({ title, children }) => {
-  const [open, setOpen] = useState(true);
+const CollapsibleListItem = ({ isOpen = false, title, children }) => {
+  const [open, setOpen] = useState(isOpen);
   const handleClick = () => {
     setOpen(!open);
   };

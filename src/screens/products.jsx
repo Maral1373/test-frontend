@@ -1,31 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import { fetchProducts, addToCart, addToFavorite } from "../api/api";
-import { styled } from "@mui/material/styles";
 import FiltersList from "../components/FilterList";
 import { filtersInitialState, filterProducts } from "../utils/utils";
 import { ProductCard } from "../components/ProductCard";
 import Loading from "../components/Loading";
 import Carousel from "../components/Carousel";
 import HeaderBoxes from "../components/HeaderBoxes";
-
-const Flex = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "row",
-  maxWidth: "80vw",
-  margin: "auto",
-}));
-
-const Left = styled("div")(({ theme }) => ({
-  flex: 1,
-}));
-
-const Right = styled("div")(({ theme }) => ({
-  flex: 3,
-}));
 
 export default function Products() {
   const theme = useTheme();
@@ -66,29 +49,27 @@ export default function Products() {
         <Carousel />
         <HeaderBoxes />
       </Box>
-      <Flex>
-        <Left>
+      <Grid container sx={{ margin: "auto", maxWidth: "80vw" }} spacing={2}>
+        <Grid item xs={12} sm={3}>
           <FiltersList setFilter={setFilter} />
-        </Left>
-        <Right>
-          <Container sx={{ my: 0 }} maxWidth="xl">
-            <Grid container spacing={2}>
-              {filteredProducts ? (
-                filteredProducts.map((product) => (
-                  <ProductCard
-                    key={product._id}
-                    addToCart={addToCart}
-                    addToFavorite={addToFavorite}
-                    product={product}
-                  />
-                ))
-              ) : (
-                <Loading />
-              )}
-            </Grid>
-          </Container>
-        </Right>
-      </Flex>
+        </Grid>
+        <Grid item xs={12} sm={9}>
+          <Grid container spacing={2}>
+            {filteredProducts ? (
+              filteredProducts.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  addToCart={addToCart}
+                  addToFavorite={addToFavorite}
+                  product={product}
+                />
+              ))
+            ) : (
+              <Loading />
+            )}
+          </Grid>
+        </Grid>
+      </Grid>
     </main>
   );
 }

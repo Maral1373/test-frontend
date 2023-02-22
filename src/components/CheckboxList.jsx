@@ -26,10 +26,7 @@ const CheckboxList = ({ name, options, onChange }) => {
   };
 
   return (
-    <List
-      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-      key={name}
-    >
+    <List sx={{ width: "100%", bgcolor: "background.paper" }} key={name}>
       {options.map(({ label, value }) => {
         const labelId = `checkbox-list-label-${value}`;
 
