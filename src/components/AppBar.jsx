@@ -43,6 +43,7 @@ const settings = [
   { title: "Forgot Password", link: "forgot", private: false },
   { title: "Profile", link: "profile", private: true },
   { title: "Orders", link: "orders", private: true },
+  { title: "Favorites", link: "favorites", private: true },
   { title: "Basket", link: "basket", private: true },
   { title: "Logout", link: "logout", private: true },
 ];

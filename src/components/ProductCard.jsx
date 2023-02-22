@@ -11,7 +11,14 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export const ProductCard = ({ addToCart, addToFavorite, product }) => {
+export const ProductCard = ({
+  addToCart,
+  addToFavorite,
+  product,
+  removeFromFavorite,
+  isFavorited,
+  reload,
+}) => {
   const theme = useTheme();
   const {
     photo,
@@ -24,6 +31,7 @@ export const ProductCard = ({ addToCart, addToFavorite, product }) => {
     camera,
     price,
   } = product.info;
+
   return (
     <Grid item key={product._id} xs={12} sm={6} md={3}>
       <Card
@@ -116,12 +124,19 @@ export const ProductCard = ({ addToCart, addToFavorite, product }) => {
                 bgcolor: "#FFF5EB",
               },
             }}
-            onClick={() => addToFavorite(product)}
+            onClick={async () => {
+              if (isFavorited) {
+                await removeFromFavorite({ id: product._id });
+              } else {
+                await addToFavorite(product);
+              }
+              await reload();
+            }}
           >
             <FavoriteIcon
               sx={{
                 cursor: "pointer",
-                color: "#ff8a80",
+                color: isFavorited ? "#ff8a80" : "lightgrey",
                 "&:hover": {
                   borderColor: "purple",
                 },

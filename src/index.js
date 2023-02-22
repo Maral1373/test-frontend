@@ -17,6 +17,7 @@ import Login from "./screens/login";
 import Signup from "./screens/signup";
 import Forgot from "./screens/forgot";
 import Orders from "./screens/orders";
+import Favorites from "./screens/favorites";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "favorites",
+        element: <Favorites />,
       },
       {
         path: "products/:productId",

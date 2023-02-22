@@ -15,11 +15,32 @@ export const addToCart = async (product) => {
     return Promise.resolve();
   } catch (e) {
     console.log(e);
-    return Promise.reject(e);
+    throw e;
   }
 };
-export const addToFavorite = async () => {
+
+export const addToFavorite = async (product) => {
   const isLoggedIn = typeof getToken() === "string";
+  if (!isLoggedIn) return alert("You need to log in first");
+  try {
+    return http.post(`/favorites`, {
+      product: product._id,
+    });
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+export const removeFromFavorite = async (params) => {
+  const isLoggedIn = typeof getToken() === "string";
+  if (!isLoggedIn) return alert("You need to log in first");
+  try {
+    return http.delete(`/favorites`, { params });
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };
 
 export const getCart = async () => {
@@ -79,7 +100,7 @@ export const registerUser = async ({
   } catch (e) {
     console.log(e);
     setToken(null);
-    return Promise.reject(e);
+    throw e;
   }
 };
 
@@ -120,6 +141,16 @@ export const getUser = async () => {
     return http.get(`/user`);
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const getFavorites = async () => {
+  try {
+    const res = await http.get(`/user`);
+    return res.data.favorites;
+  } catch (e) {
+    console.log(e);
+    throw e;
   }
 };
 

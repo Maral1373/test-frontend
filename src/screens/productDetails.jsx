@@ -7,27 +7,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Grid from "@mui/material/Grid";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useTheme } from "@mui/material";
 import { fetchProduct, addToCart, addToFavorite } from "../api/api";
 import { useParams } from "react-router-dom";
-import { styled } from "@mui/material/styles";
 import Loading from "../components/Loading";
-
-const Flex = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "row",
-  maxWidth: "80vw",
-  margin: "auto",
-}));
-
-const Left = styled("div")(({ theme }) => ({
-  flex: 1,
-}));
-
-const Right = styled("div")(({ theme }) => ({
-  flex: 1,
-}));
 
 export default function ProductDetails() {
   const theme = useTheme();
@@ -55,10 +40,10 @@ export default function ProductDetails() {
           <Loading />
         ) : (
           <Card>
-            <Flex>
-              <Left>
+            <Grid container width={"100vw"} spacing={2}>
+              <Grid item xs={12} sm={3}>
                 <CardMedia
-                  maxWidth="xl" // make larger
+                  maxWidth="xl"
                   component="img"
                   sx={{
                     px: 3,
@@ -70,8 +55,8 @@ export default function ProductDetails() {
                   }}
                   image={product.info.photo}
                 />
-              </Left>
-              <Right>
+              </Grid>
+              <Grid item xs={12} sm={9}>
                 <CardContent
                   sx={{
                     flexGrow: 1,
@@ -110,8 +95,6 @@ export default function ProductDetails() {
                   </IconButton>
                   <IconButton
                     aria-label="add to favorites"
-                    // variant="plain"
-                    // color="danger"
                     sx={{
                       "&:hover": {
                         bgcolor: "#FFF5EB",
@@ -130,8 +113,8 @@ export default function ProductDetails() {
                     />
                   </IconButton>
                 </CardActions>
-              </Right>
-            </Flex>
+              </Grid>
+            </Grid>
           </Card>
         )}
       </Container>
