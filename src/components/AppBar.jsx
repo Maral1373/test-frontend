@@ -90,7 +90,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function ResponsiveAppBar(props) {
+function ResponsiveAppBar({ searchQuery, setSearchQuery }) {
   const theme = useTheme();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -218,8 +218,10 @@ function ResponsiveAppBar(props) {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              value={searchQuery}
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />

@@ -1,4 +1,5 @@
-import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import { Outlet, useOutletContext } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { styled } from "@mui/material/styles";
@@ -17,12 +18,13 @@ const Wrapper = styled("div")(({ theme }) => ({
 }));
 
 function Layout() {
+  const [searchQuery, setSearchQuery] = useState("");
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar />
+      <AppBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Wrapper>
-        <Outlet />
+        <Outlet context={{ searchQuery, setSearchQuery }} />
       </Wrapper>
       <Footer />
     </ThemeProvider>
@@ -30,3 +32,7 @@ function Layout() {
 }
 
 export default Layout;
+
+export function useSearch() {
+  return useOutletContext();
+}

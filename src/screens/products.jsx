@@ -16,16 +16,20 @@ import Loading from "../components/Loading";
 import Carousel from "../components/Carousel";
 import HeaderBoxes from "../components/HeaderBoxes";
 import { getToken } from "../api/token";
+import { useSearch } from "./layout";
 
 export default function Products(props) {
   const theme = useTheme();
   const [products, setProducts] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [filters, setFilters] = useState(filtersInitialState);
+  const { searchQuery } = useSearch();
 
   useEffect(() => {
     initialize();
   }, []);
+
+  useEffect(() => {}, [searchQuery]);
 
   const initialize = async () => {
     try {
@@ -49,9 +53,15 @@ export default function Products(props) {
 
   const clearFilters = () => setFilters(filtersInitialState);
 
-  const filteredProducts = products ? filterProducts(products, filters) : null;
+  const productsQuery = searchQuery
+    ? products.filter((p) =>
+        p.info.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : products;
 
-  console.log(props);
+  const filteredProducts = products
+    ? filterProducts(productsQuery, filters)
+    : null;
 
   return (
     <main>
