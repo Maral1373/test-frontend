@@ -5,12 +5,14 @@ import { getCart, deleteCart, editCart, createOrder } from "../api/api";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Loading from "../components/Loading";
+import { useNavigate } from "react-router-dom";
 
 import "./cart.css";
 
 const Cart = () => {
   const [cart, setCart] = useState({ items: [] });
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     initialize();
@@ -66,8 +68,8 @@ const Cart = () => {
         return order;
       });
       await createOrder({ order });
-      alert("Order submitted successfully");
       await emptyCart();
+      navigate("/orders");
     } catch (e) {
       alert("Order submission failed");
     }
