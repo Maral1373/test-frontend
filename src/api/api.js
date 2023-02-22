@@ -123,3 +123,12 @@ export const getUser = async () => {
     console.log(e);
   }
 };
+
+export const editUser = async (data) => {
+  try {
+    return http.put(`/user`, data);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};

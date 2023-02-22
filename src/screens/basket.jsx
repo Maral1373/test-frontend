@@ -68,7 +68,7 @@ const Cart = () => {
         return order;
       });
       await createOrder({ order });
-      await emptyCart();
+      await emptyCart(); // fix
       navigate("/orders");
     } catch (e) {
       alert("Order submission failed");
@@ -153,7 +153,7 @@ const Cart = () => {
                           <img src={item.product.info.photo} />
                         </td>
                         <td>
-                          <Link to={`/product/${item.product._id}`}>
+                          <Link to={`/products/${item.product._id}`}>
                             {item.product.info.name}
                           </Link>
                         </td>

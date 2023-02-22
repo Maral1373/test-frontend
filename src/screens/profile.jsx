@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getUser } from "../api/api";
+import { getUser, editUser } from "../api/api";
 import Container from "@mui/material/Container";
 
 import Divider from "@mui/material/Divider";
