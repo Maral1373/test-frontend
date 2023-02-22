@@ -39,7 +39,6 @@ const Cart = () => {
       });
 
       await initialize();
-      alert("Item removed successfully");
     } catch (e) {
       alert("Removing item failed");
     }
@@ -49,7 +48,6 @@ const Cart = () => {
     try {
       await deleteCart({ id: cart._id });
       await initialize();
-      alert("Cart emptied successfully");
     } catch (e) {
       console.log(e);
       alert("Emptying Cart failed");

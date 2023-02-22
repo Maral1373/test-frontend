@@ -48,7 +48,10 @@ export const ProductCard = ({ addToCart, addToFavorite, product }) => {
       >
         <Link
           to={`/products/${product._id}`}
-          style={{ textDecoration: "none", color: "black" }}
+          style={{
+            textDecoration: "none",
+            color: "black",
+          }}
         >
           <CardMedia
             component="img"
@@ -85,6 +88,7 @@ export const ProductCard = ({ addToCart, addToFavorite, product }) => {
             <Typography>{price}</Typography>
           </CardContent>
         </Link>
+        <div style={{ flex: 1 }} />
         <CardActions>
           <IconButton
             size="large"
