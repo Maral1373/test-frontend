@@ -42,7 +42,7 @@ export default function ProductDetails() {
     if (!productId) return;
     try {
       const response = await fetchProduct(productId);
-      setProduct(response.data.info);
+      setProduct(response.data);
     } catch (e) {
       console.log(e);
     }
@@ -68,7 +68,7 @@ export default function ProductDetails() {
                       transform: "scale3d(1.05, 1.05, 1)",
                     },
                   }}
-                  image={product.photo}
+                  image={product.info.photo}
                 />
               </Left>
               <Right>
@@ -78,16 +78,17 @@ export default function ProductDetails() {
                   }}
                 >
                   <Typography gutterBottom variant="h5" component="h2">
-                    {product.name}
+                    {product.info.name}
                   </Typography>
-                  <Typography>{product.camera}</Typography>
+                  <Typography>{product.info.camera}</Typography>
                   <Typography>
-                    {product.displaySize} ({product.displayResolution})
+                    {product.info.displaySize} ({product.info.displayResolution}
+                    )
                   </Typography>
-                  <Typography>{product.cpu}</Typography>
-                  <Typography>{product.ram} Ram</Typography>
-                  <Typography>{product.internalMemory} Storage</Typography>
-                  <Typography>${product.price}</Typography>
+                  <Typography>{product.info.cpu}</Typography>
+                  <Typography>{product.info.ram} Ram</Typography>
+                  <Typography>{product.info.internalMemory} Storage</Typography>
+                  <Typography>${product.info.price}</Typography>
                 </CardContent>
                 <CardActions>
                   <IconButton

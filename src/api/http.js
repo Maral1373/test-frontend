@@ -30,4 +30,9 @@ instance.interceptors.response.use(
   }
 );
 
+instance.interceptors.request.use((request) => {
+  console.log("baseURL", request.baseURL);
+  return request;
+});
+
 export default instance;
