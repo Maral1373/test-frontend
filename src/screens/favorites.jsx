@@ -15,6 +15,7 @@ export default function Favorites() {
   const theme = useTheme();
   const [favorites, setFavorites] = useState([]);
   const [products, setProducts] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     initialize();
@@ -22,12 +23,15 @@ export default function Favorites() {
 
   const initialize = async () => {
     try {
+      setIsLoading(true);
       const favoritesData = await getFavorites();
       setFavorites(favoritesData || []);
       const prods = await fetchProducts();
       setProducts(prods.data || []);
+      setIsLoading(false);
     } catch (e) {
       console.log(e);
+      setIsLoading(false);
     }
   };
 
@@ -35,10 +39,14 @@ export default function Favorites() {
     ? products.filter((p) => favorites.includes(p._id))
     : null;
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <main>
       <Grid container sx={{ margin: "auto", maxWidth: "80vw" }} spacing={2}>
-        {filteredProducts ? (
+        {filteredProducts.length ? (
           filteredProducts.map((product) => (
             <ProductCard
               key={product._id}
@@ -51,7 +59,9 @@ export default function Favorites() {
             />
           ))
         ) : (
-          <Loading />
+          <Grid item sx={{ width: "100%" }}>
+            <h1>No favorites.</h1>
+          </Grid>
         )}
       </Grid>
     </main>
