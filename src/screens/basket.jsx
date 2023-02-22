@@ -25,6 +25,8 @@ const Cart = () => {
         ...cart.data,
         items: cart.data.items.filter((j) => !!j.product),
       });
+    } else if (cart.status === 404) {
+      setCart({ items: [] });
     }
     setIsLoading(false);
   };

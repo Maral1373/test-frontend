@@ -32,7 +32,7 @@ export const getCart = async () => {
 
 export const deleteCart = async (params) => {
   try {
-    return http.delete(`/cart`, params);
+    return http.delete(`/cart`, { params });
   } catch (e) {
     console.log(e);
   }
