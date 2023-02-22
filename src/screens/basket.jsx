@@ -4,17 +4,20 @@ import numeral from "numeral";
 import { getCart, deleteCart, editCart, createOrder } from "../api/api";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import Loading from "../components/Loading";
 
 import "./cart.css";
 
 const Cart = () => {
   const [cart, setCart] = useState({ items: [] });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     initialize();
   }, []);
 
   const initialize = async () => {
+    setIsLoading(true);
     const cart = await getCart();
     if (cart.status === 200 && cart.data.items) {
       // filtering because of a problem in backend. some items doesn't have the product key. will fix later.
@@ -23,6 +26,7 @@ const Cart = () => {
         items: cart.data.items.filter((j) => !!j.product),
       });
     }
+    setIsLoading(false);
   };
 
   const removeItem = async (itemId) => {
@@ -45,6 +49,7 @@ const Cart = () => {
       await getCart();
       alert("Cart emptied successfully");
     } catch (e) {
+      console.log(e);
       alert("Emptying Cart failed");
     }
   };
@@ -61,115 +66,123 @@ const Cart = () => {
         return order;
       });
       await createOrder({ order });
-      await emptyCart();
       alert("Order submitted successfully");
+      await emptyCart();
     } catch (e) {
       alert("Order submission failed");
     }
   };
 
-  const cartExists = cart._id !== "undefined" && cart.items.length > 0;
+  const cartExists =
+    !isLoading && cart._id !== "undefined" && cart.items.length > 0;
 
   return (
     <Container sx={{ my: 0 }} maxWidth="xl">
-      <div className="cart-container">
-        <h1>Your Cart</h1>
-        <div className="cart">
-          <div className="cart-info">
-            <div className="info">
-              <p>
-                <b>Number of items: </b>
-                {cartExists
-                  ? cart.items.reduce((acc, item) => (acc += item.quantity), 0)
-                  : 0}
-              </p>
-              <p>
-                <b>Total amount: </b>
-                <span className="total">
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="cart-container">
+          <h1>Your Cart</h1>
+          <div className="cart">
+            <div className="cart-info">
+              <div className="info">
+                <p>
+                  <b>Number of items: </b>
                   {cartExists
-                    ? numeral(
-                        cart.items.reduce(
-                          (acc, item) =>
-                            (acc += item.product.info.price * item.quantity),
-                          0
-                        )
-                      ).format("$0,0.00")
-                    : numeral(0).format("$0,0.00")}
-                </span>
-              </p>
+                    ? cart.items.reduce(
+                        (acc, item) => (acc += item.quantity),
+                        0
+                      )
+                    : 0}
+                </p>
+                <p>
+                  <b>Total amount: </b>
+                  <span className="total">
+                    {cartExists
+                      ? numeral(
+                          cart.items.reduce(
+                            (acc, item) =>
+                              (acc += item.product.info.price * item.quantity),
+                            0
+                          )
+                        ).format("$0,0.00")
+                      : numeral(0).format("$0,0.00")}
+                  </span>
+                </p>
+              </div>
+              <div className="btns">
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="secondary"
+                  disabled={!cartExists}
+                  onClick={makeOrder}
+                >
+                  Checkout
+                </Button>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="secondary"
+                  disabled={!cartExists}
+                  onClick={emptyCart}
+                >
+                  Empty cart
+                </Button>
+              </div>
             </div>
-            <div className="btns">
-              <Button
-                variant="contained"
-                type="submit"
-                color="secondary"
-                disabled={!cartExists}
-                onClick={makeOrder}
-              >
-                Checkout
-              </Button>
-              <Button
-                variant="contained"
-                type="submit"
-                color="secondary"
-                disabled={!cartExists}
-                onClick={emptyCart}
-              >
-                Empty cart
-              </Button>
-            </div>
-          </div>
-          <div className="cart-items">
-            {cartExists ? (
-              <table>
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Qty</th>
-                    <th>Total</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cart.items.map((item) => (
-                    <tr key={item.product.info.name}>
-                      <td className="cart-hover">
-                        <img src={item.product.info.photo} />
-                      </td>
-                      <td>
-                        <Link to={`/product/${item.product._id}`}>
-                          {item.product.info.name}
-                        </Link>
-                      </td>
-                      <td>
-                        {numeral(item.product.info.price).format("$0,0.00")}
-                      </td>
-                      <td>{item.quantity}</td>
-                      <td>
-                        {numeral(
-                          item.product.info.price * item.quantity
-                        ).format("$0,0.00")}
-                      </td>
-                      <td>
-                        <button
-                          title="Remove this item from the cart"
-                          onClick={() => removeItem(item._id)}
-                        >
-                          X
-                        </button>
-                      </td>
+            <div className="cart-items">
+              {cartExists ? (
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Product Name</th>
+                      <th>Price</th>
+                      <th>Qty</th>
+                      <th>Total</th>
+                      <th></th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <h1>No items in the cart.</h1>
-            )}
+                  </thead>
+                  <tbody>
+                    {cart.items.map((item) => (
+                      <tr key={item.product.info.name}>
+                        <td className="cart-hover">
+                          <img src={item.product.info.photo} />
+                        </td>
+                        <td>
+                          <Link to={`/product/${item.product._id}`}>
+                            {item.product.info.name}
+                          </Link>
+                        </td>
+                        <td>
+                          {numeral(item.product.info.price).format("$0,0.00")}
+                        </td>
+                        <td>{item.quantity}</td>
+                        <td>
+                          {numeral(
+                            item.product.info.price * item.quantity
+                          ).format("$0,0.00")}
+                        </td>
+                        <td>
+                          <button
+                            title="Remove this item from the cart"
+                            onClick={() => removeItem(item._id)}
+                          >
+                            X
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <h1>No items in the cart.</h1>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Container>
   );
 };
