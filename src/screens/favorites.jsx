@@ -37,7 +37,7 @@ export default function Favorites() {
 
   const filteredProducts = products
     ? products.filter((p) => favorites.includes(p._id))
-    : null;
+    : [];
 
   if (isLoading) {
     return <Loading />;

@@ -17,7 +17,7 @@ import Carousel from "../components/Carousel";
 import HeaderBoxes from "../components/HeaderBoxes";
 import { getToken } from "../api/token";
 
-export default function Products() {
+export default function Products(props) {
   const theme = useTheme();
   const [products, setProducts] = useState(null);
   const [favorites, setFavorites] = useState([]);
@@ -50,6 +50,8 @@ export default function Products() {
   const clearFilters = () => setFilters(filtersInitialState);
 
   const filteredProducts = products ? filterProducts(products, filters) : null;
+
+  console.log(props);
 
   return (
     <main>
