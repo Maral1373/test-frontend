@@ -2,8 +2,6 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -18,13 +16,16 @@ export default function Login() {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
-    loginUser(data.get("email"), data.get("password"), () =>
-      navigate("/products")
-    );
+    try {
+      await loginUser(data.get("email"), data.get("password"));
+      navigate("/products");
+    } catch (_) {
+      alert("Login failed");
+    }
   };
 
   return (
@@ -63,10 +64,6 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
           />
           <Button
             type="submit"

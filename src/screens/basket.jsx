@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import numeral from "numeral";
-import RemoveShoppingCart from "@mui/icons-material/RemoveShoppingCart";
-import NavigateNext from "@mui/icons-material/NavigateNext";
-import { getCart } from "../api/api";
+import { getCart, deleteCart, editCart, createOrder } from "../api/api";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 
@@ -27,38 +25,47 @@ const Cart = () => {
     }
   };
 
-  const deleteCart = async () => {};
-
-  const editCart = async () => {};
-
-  const createOrder = async () => {};
-
   const removeItem = async (itemId) => {
-    await editCart({
-      cartId: cart._id,
-      itemId: itemId,
-    });
+    try {
+      await editCart({
+        cartId: cart._id,
+        itemId: itemId,
+      });
 
-    getCart();
+      await getCart();
+      alert("Item removed successfully");
+    } catch (e) {
+      alert("Removing item failed");
+    }
   };
 
   const emptyCart = async () => {
-    await deleteCart({ id: cart._id });
-    await getCart();
+    try {
+      await deleteCart({ id: cart._id });
+      await getCart();
+      alert("Cart emptied successfully");
+    } catch (e) {
+      alert("Emptying Cart failed");
+    }
   };
 
   const makeOrder = async () => {
-    const order = cart.items.map((item) => {
-      let order = {
-        name: item.product.info.name,
-        price: item.product.info.price,
-        quantity: item.quantity,
-        dateCreated: Date.now(),
-      };
-      return order;
-    });
-    await createOrder({ order });
-    await emptyCart();
+    try {
+      const order = cart.items.map((item) => {
+        let order = {
+          name: item.product.info.name,
+          price: item.product.info.price,
+          quantity: item.quantity,
+          dateCreated: Date.now(),
+        };
+        return order;
+      });
+      await createOrder({ order });
+      await emptyCart();
+      alert("Order submitted successfully");
+    } catch (e) {
+      alert("Order submission failed");
+    }
   };
 
   const cartExists = cart._id !== "undefined" && cart.items.length > 0;
@@ -94,22 +101,22 @@ const Cart = () => {
             <div className="btns">
               <Button
                 variant="contained"
-                onClick={() => {}}
-                className="btn"
-                label="Checkout"
-                icon={<NavigateNext />}
-                primary={true}
+                type="submit"
+                color="secondary"
                 disabled={!cartExists}
-              />
+                onClick={makeOrder}
+              >
+                Checkout
+              </Button>
               <Button
                 variant="contained"
-                onClick={() => {}}
-                className="btn"
-                label="Empty cart"
-                icon={<RemoveShoppingCart />}
-                secondary={true}
+                type="submit"
+                color="secondary"
                 disabled={!cartExists}
-              />
+                onClick={emptyCart}
+              >
+                Empty cart
+              </Button>
             </div>
           </div>
           <div className="cart-items">
