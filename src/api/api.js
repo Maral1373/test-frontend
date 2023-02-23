@@ -1,5 +1,5 @@
 import http from "./http";
-import { getToken, setToken } from "./token";
+import { getToken, setToken, setAdminToken, getAdminToken } from "./token";
 
 export const addToCart = async (product) => {
   const isLoggedIn = typeof getToken() === "string";
@@ -104,6 +104,27 @@ export const registerUser = async ({
   }
 };
 
+export const registerAdmin = async ({ email, password, key }) => {
+  try {
+    console.log("step 2", { email, password, key });
+    const res = await http.post(`/admin/auth/register`, {
+      username: email,
+      password,
+      email,
+      key,
+    });
+    console.log("res", res);
+    if (res.data.token) {
+      setAdminToken(res.data.token);
+      return Promise.resolve();
+    }
+  } catch (e) {
+    console.log(e);
+    setAdminToken(null);
+    throw e;
+  }
+};
+
 export const fetchProducts = async () => {
   try {
     return http.get(`/catalog`);
@@ -132,6 +153,22 @@ export const loginUser = async (email, password) => {
     return res.data.token;
   } catch (e) {
     setToken(null);
+    throw e;
+  }
+};
+
+export const loginAdmin = async (email, password) => {
+  try {
+    const res = await http.post(`/admin/auth/login`, {
+      email,
+      password,
+    });
+    if (res.data.token) {
+      setAdminToken(res.data.token);
+    }
+    return res.data.token;
+  } catch (e) {
+    setAdminToken(null);
     throw e;
   }
 };

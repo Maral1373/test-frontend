@@ -16,7 +16,7 @@ import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { useTheme } from "@mui/material";
-import { getToken } from "../api/token";
+import { getToken, getAdminToken } from "../api/token";
 import { SITE_NAME } from "../consts/consts";
 
 import { Link } from "react-router-dom";
@@ -38,15 +38,24 @@ const pages = [
   },
 ];
 
-const settings = [
+const userSettings = [
   { title: "Sign in", link: "login", private: false },
   { title: "Sign up", link: "signup", private: false },
   { title: "Forgot Password", link: "forgot", private: false },
+  { title: "Admin Sign in", link: "admin/login", private: false },
+  { title: "Admin Sign up", link: "admin/signup", private: false },
   { title: "Profile", link: "profile", private: true },
   { title: "Orders", link: "orders", private: true },
   { title: "Favorites", link: "favorites", private: true },
   { title: "Basket", link: "basket", private: true },
   { title: "Logout", link: "logout", private: true },
+];
+
+const adminSettings = [
+  { title: "Orders", link: "admin/orders", private: true },
+  { title: "Products", link: "admin/products", private: true },
+  { title: "Users", link: "admin/users", private: true },
+  { title: "Logout", link: "admin/logout", private: true },
 ];
 
 const Search = styled("div")(({ theme }) => ({
@@ -114,10 +123,14 @@ function ResponsiveAppBar({ searchQuery, setSearchQuery }) {
     setAnchorElUser(null);
   };
 
-  const isLoggedIn = typeof getToken() === "string";
-  const settingItemsToShow = isLoggedIn
-    ? settings.filter((s) => s.private)
-    : settings.filter((s) => !s.private);
+  const isUserLoggedIn = typeof getToken() === "string";
+  const isAdminLoggedIn = typeof getAdminToken() === "string";
+
+  const settingItemsToShow = isAdminLoggedIn
+    ? adminSettings
+    : isUserLoggedIn
+    ? userSettings.filter((s) => s.private)
+    : userSettings.filter((s) => !s.private);
 
   return (
     <AppBar position="fixed" color="primary">
