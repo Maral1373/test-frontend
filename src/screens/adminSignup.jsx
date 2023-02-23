@@ -22,7 +22,7 @@ export default function SignUp() {
         password,
         key,
       });
-      navigate("/admin/products");
+      navigate("/admin/orders");
     } catch (e) {
       console.log("error", e);
       alert("Registration failed");

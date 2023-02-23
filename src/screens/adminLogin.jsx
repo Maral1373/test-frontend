@@ -22,8 +22,9 @@ export default function AdminLogin() {
     const data = new FormData(event.currentTarget);
     try {
       await loginAdmin(data.get("email"), data.get("password"));
-      navigate("/admin/products");
-    } catch (_) {
+      navigate("/admin/orders");
+    } catch (e) {
+      console.log("error", e);
       alert("Login failed");
     }
   };

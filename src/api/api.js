@@ -117,6 +117,9 @@ export const registerAdmin = async ({ email, password, key }) => {
     if (res.data.token) {
       setAdminToken(res.data.token);
       return Promise.resolve();
+    } else {
+      setAdminToken(null);
+      throw new Error("No token received");
     }
   } catch (e) {
     console.log(e);
@@ -163,8 +166,12 @@ export const loginAdmin = async (email, password) => {
       email,
       password,
     });
+    console.log("admin login res", res);
     if (res.data.token) {
       setAdminToken(res.data.token);
+    } else {
+      setAdminToken(null);
+      throw new Error("No token received");
     }
     return res.data.token;
   } catch (e) {
@@ -197,5 +204,13 @@ export const editUser = async (data) => {
   } catch (e) {
     console.log(e);
     throw e;
+  }
+};
+
+export const getOrders = async () => {
+  try {
+    return http.get(`/admin/orders`);
+  } catch (e) {
+    console.log(e);
   }
 };
