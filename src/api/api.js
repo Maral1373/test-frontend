@@ -106,14 +106,12 @@ export const registerUser = async ({
 
 export const registerAdmin = async ({ email, password, key }) => {
   try {
-    console.log("step 2", { email, password, key });
     const res = await http.post(`/admin/auth/register`, {
       username: email,
       password,
       email,
       key,
     });
-    console.log("res", res);
     if (res.data.token) {
       setAdminToken(res.data.token);
       return Promise.resolve();
@@ -210,6 +208,22 @@ export const editUser = async (data) => {
 export const getOrders = async () => {
   try {
     return http.get(`/admin/orders`);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getUsers = async () => {
+  try {
+    return http.get(`/admin/users`);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const createProduct = async (params) => {
+  try {
+    return http.post(`/admin/products`, params);
   } catch (e) {
     console.log(e);
   }

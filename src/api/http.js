@@ -34,6 +34,7 @@ instance.interceptors.response.use(
       if (error.response.status === 401 || error.response.status === 403) {
         console.error("Oh Oh, oopsi happened 401 or 403", error.response);
         removeToken();
+        removeAdminToken();
       }
     }
     return error;

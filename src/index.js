@@ -23,6 +23,8 @@ import AdminLogout from "./screens/adminLogout";
 import AdminLogin from "./screens/adminLogin";
 import AdminSignup from "./screens/adminSignup";
 import AdminOrders from "./screens/adminOrders";
+import AdminUsers from "./screens/adminUsers";
+import AdminProducts from "./screens/adminProducts";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +95,14 @@ const router = createBrowserRouter([
       {
         path: "admin/orders",
         element: <AdminOrders />,
+      },
+      {
+        path: "admin/users",
+        element: <AdminUsers />,
+      },
+      {
+        path: "admin/products",
+        element: <AdminProducts />,
       },
       {
         path: "forgot",

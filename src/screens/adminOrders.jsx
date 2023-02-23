@@ -9,7 +9,7 @@ import Divider from "@mui/material/Divider";
 import "./orders.css";
 import Loading from "../components/Loading";
 
-const Orders = () => {
+const AdminOrders = () => {
   const [orders, setOrders] = useState(null);
 
   useEffect(() => {
@@ -19,7 +19,6 @@ const Orders = () => {
   const initialize = async () => {
     try {
       const response = await getOrders();
-      console.log(response);
       setOrders(response.data);
     } catch (e) {
       console.log("error", e);
@@ -32,7 +31,7 @@ const Orders = () => {
         <Loading />
       ) : (
         <>
-          <h2>Order History</h2>
+          <h2>Orders</h2>
           <Divider />
           <div className="orders">
             {orders ? (
@@ -69,7 +68,7 @@ const Orders = () => {
                 </tbody>
               </table>
             ) : (
-              <h1>No order history.</h1>
+              <h1>No orders.</h1>
             )}
           </div>
         </>
@@ -78,4 +77,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default AdminOrders;

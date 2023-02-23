@@ -20,7 +20,7 @@ import { useSearch } from "./layout";
 
 export default function Products(props) {
   const theme = useTheme();
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [filters, setFilters] = useState(filtersInitialState);
   const { searchQuery } = useSearch();
@@ -29,13 +29,11 @@ export default function Products(props) {
     initialize();
   }, []);
 
-  useEffect(() => {}, [searchQuery]);
-
   const initialize = async () => {
     try {
       const isLoggedIn = typeof getToken() === "string";
       const prods = await fetchProducts();
-      setProducts(prods.data || []);
+      setProducts(prods.data.filter((p) => !!p.info && !!p.tags) || []);
       if (isLoggedIn) {
         const favoritesData = await getFavorites();
         setFavorites(favoritesData || []);
