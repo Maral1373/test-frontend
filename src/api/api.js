@@ -3,16 +3,16 @@ import { getToken, setToken, setAdminToken, getAdminToken } from "./token";
 
 export const addToCart = async (product) => {
   const isLoggedIn = typeof getToken() === "string";
-  if (!isLoggedIn) return alert("You need to log in first");
+  if (!isLoggedIn) return Promise.reject("You need to log in first");
   try {
     const response = await http.post(`/cart`, {
       product: product._id,
       quantity: 1,
     });
     if (response.status === 200) {
-      alert("Item added to your cart successfully");
+      return Promise.resolve("Item added to your cart successfully");
     }
-    return Promise.resolve();
+    return Promise.reject(response.statusText);
   } catch (e) {
     console.log(e);
     throw e;
@@ -21,7 +21,7 @@ export const addToCart = async (product) => {
 
 export const addToFavorite = async (product) => {
   const isLoggedIn = typeof getToken() === "string";
-  if (!isLoggedIn) return alert("You need to log in first");
+  if (!isLoggedIn) return Promise.reject("You need to log in first");
   try {
     return http.post(`/favorites`, {
       product: product._id,
@@ -34,7 +34,7 @@ export const addToFavorite = async (product) => {
 
 export const removeFromFavorite = async (params) => {
   const isLoggedIn = typeof getToken() === "string";
-  if (!isLoggedIn) return alert("You need to log in first");
+  if (!isLoggedIn) return Promise.reject("You need to log in first");
   try {
     return http.delete(`/favorites`, { params });
   } catch (e) {

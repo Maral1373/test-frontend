@@ -16,14 +16,14 @@ import Loading from "../components/Loading";
 import Carousel from "../components/Carousel";
 import HeaderBoxes from "../components/HeaderBoxes";
 import { getToken } from "../api/token";
-import { useSearch } from "./layout";
+import { useCustomContext } from "./layout";
 
 export default function Products(props) {
   const theme = useTheme();
   const [products, setProducts] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [filters, setFilters] = useState(filtersInitialState);
-  const { searchQuery } = useSearch();
+  const { searchQuery } = useCustomContext();
 
   useEffect(() => {
     initialize();

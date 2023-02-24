@@ -10,6 +10,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useCustomContext } from "../screens/layout";
 
 export const ProductCard = ({
   addToCart,
@@ -20,6 +21,9 @@ export const ProductCard = ({
   reload,
 }) => {
   const theme = useTheme();
+  const {
+    snackbar: { setOpen, setText, setSeverity },
+  } = useCustomContext();
   const {
     photo,
     name,
@@ -106,7 +110,18 @@ export const ProductCard = ({
                 bgcolor: "#FFF5EB",
               },
             }}
-            onClick={() => addToCart(product)}
+            onClick={async () => {
+              try {
+                const result = await addToCart(product);
+                setText(result);
+                setSeverity("success");
+                setOpen(true);
+              } catch (e) {
+                setText(e);
+                setSeverity("error");
+                setOpen(true);
+              }
+            }}
           >
             <AddShoppingCartIcon
               sx={{
@@ -125,12 +140,24 @@ export const ProductCard = ({
               },
             }}
             onClick={async () => {
-              if (isFavorited) {
-                await removeFromFavorite({ id: product._id });
-              } else {
-                await addToFavorite(product);
+              try {
+                if (isFavorited) {
+                  await removeFromFavorite({ id: product._id });
+                  setText("Item removed from your favorites");
+                  setSeverity("success");
+                  setOpen(true);
+                } else {
+                  await addToFavorite(product);
+                  setText("Item added to your favorites");
+                  setSeverity("success");
+                  setOpen(true);
+                }
+                await reload();
+              } catch (e) {
+                setText(e);
+                setSeverity("error");
+                setOpen(true);
               }
-              await reload();
             }}
           >
             <FavoriteIcon

@@ -11,9 +11,13 @@ import Container from "@mui/material/Container";
 import { useState } from "react";
 import { registerUser } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { useCustomContext } from "./layout";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const {
+    snackbar: { setOpen, setText, setSeverity },
+  } = useCustomContext();
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -27,7 +31,9 @@ export default function SignUp() {
       });
       navigate("/products");
     } catch (e) {
-      alert("Registration failed");
+      setText("Registration failed");
+      setSeverity("error");
+      setOpen(true);
     }
   };
 

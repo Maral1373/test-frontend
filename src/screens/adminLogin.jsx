@@ -11,10 +11,14 @@ import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import { loginAdmin } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { useCustomContext } from "./layout";
 
 export default function AdminLogin() {
   const theme = useTheme();
   const navigate = useNavigate();
+  const {
+    snackbar: { setOpen, setText, setSeverity },
+  } = useCustomContext();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +29,9 @@ export default function AdminLogin() {
       navigate("/admin/orders");
     } catch (e) {
       console.log("error", e);
-      alert("Login failed");
+      setText("Login failed");
+      setSeverity("error");
+      setOpen(true);
     }
   };
 

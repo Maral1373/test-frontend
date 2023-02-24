@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { PRODUCT_TAGS } from "../consts/consts";
 import { createProduct } from "../api/api";
+import { useCustomContext } from "./layout";
 
 const SAMPLE_DATA = {
   info: {
@@ -78,6 +79,9 @@ const INITIAL_STATE = {
 
 const AdminProducts = () => {
   const [product, setProduct] = useState(INITIAL_STATE);
+  const {
+    snackbar: { setOpen, setText, setSeverity },
+  } = useCustomContext();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -86,7 +90,9 @@ const AdminProducts = () => {
       console.log("res", res);
     } catch (e) {
       console.log("error", e);
-      alert("Registration failed");
+      setText("Registration failed");
+      setSeverity("error");
+      setOpen(true);
     }
   };
 

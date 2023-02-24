@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 
 import AppBar from "../components/AppBar";
 import Footer from "../components/Footer";
+import Snackbar from "../components/Snackbar";
 import theme from "../theme";
 
 import "@fontsource/roboto/300.css";
@@ -19,12 +20,23 @@ const Wrapper = styled("div")(({ theme }) => ({
 
 function Layout() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [open, setOpen] = React.useState(false);
+  const [text, setText] = React.useState("");
+  const [severity, setSeverity] = React.useState("success");
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Snackbar open={open} setOpen={setOpen} text={text} severity={severity} />
       <AppBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Wrapper>
-        <Outlet context={{ searchQuery, setSearchQuery }} />
+        <Outlet
+          context={{
+            searchQuery,
+            setSearchQuery,
+            snackbar: { setOpen, setText, setSeverity },
+          }}
+        />
       </Wrapper>
       <Footer />
     </ThemeProvider>
@@ -33,6 +45,6 @@ function Layout() {
 
 export default Layout;
 
-export function useSearch() {
+export function useCustomContext() {
   return useOutletContext();
 }

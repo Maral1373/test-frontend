@@ -11,10 +11,14 @@ import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import { loginUser } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { useCustomContext } from "./layout";
 
 export default function Login() {
   const theme = useTheme();
   const navigate = useNavigate();
+  const {
+    snackbar: { setOpen, setText, setSeverity },
+  } = useCustomContext();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +28,9 @@ export default function Login() {
       await loginUser(data.get("email"), data.get("password"));
       navigate("/products");
     } catch (_) {
-      alert("Login failed");
+      setText("Login failed");
+      setSeverity("error");
+      setOpen(true);
     }
   };
 

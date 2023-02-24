@@ -13,11 +13,15 @@ import { useTheme } from "@mui/material";
 import { fetchProduct, addToCart, addToFavorite } from "../api/api";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
+import { useCustomContext } from "./layout";
 
 export default function ProductDetails() {
   const theme = useTheme();
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
+  const {
+    snackbar: { setOpen, setText, setSeverity },
+  } = useCustomContext();
 
   useEffect(() => {
     initialize();
@@ -100,7 +104,18 @@ export default function ProductDetails() {
                         bgcolor: "#FFF5EB",
                       },
                     }}
-                    onClick={() => addToFavorite(product)}
+                    onClick={async () => {
+                      try {
+                        await addToFavorite(product);
+                        setText("Item added to your favorites");
+                        setSeverity("success");
+                        setOpen(true);
+                      } catch (e) {
+                        setText(e);
+                        setSeverity("error");
+                        setOpen(true);
+                      }
+                    }}
                   >
                     <FavoriteIcon
                       sx={{

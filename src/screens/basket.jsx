@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
+import { useCustomContext } from "./layout";
 
 import "./cart.css";
 
@@ -13,6 +14,9 @@ const Cart = () => {
   const [cart, setCart] = useState({ items: [] });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const {
+    snackbar: { setOpen, setText, setSeverity },
+  } = useCustomContext();
 
   useEffect(() => {
     initialize();
@@ -42,7 +46,9 @@ const Cart = () => {
 
       await initialize();
     } catch (e) {
-      alert("Removing item failed");
+      setText("Removing item failed");
+      setSeverity("error");
+      setOpen(true);
     }
   };
 
@@ -52,7 +58,9 @@ const Cart = () => {
       await initialize();
     } catch (e) {
       console.log(e);
-      alert("Emptying Cart failed");
+      setText("Emptying Cart failed");
+      setSeverity("error");
+      setOpen(true);
     }
   };
 
@@ -71,7 +79,9 @@ const Cart = () => {
       await emptyCart(); // fix
       navigate("/orders");
     } catch (e) {
-      alert("Order submission failed");
+      setText("Order submission failed");
+      setSeverity("error");
+      setOpen(true);
     }
   };
 
