@@ -45,7 +45,11 @@ export default function Favorites() {
 
   return (
     <main>
-      <Grid container sx={{ margin: "auto", maxWidth: "80vw" }} spacing={2}>
+      <Grid
+        container
+        sx={{ margin: "auto", maxWidth: "80vw", mt: 15 }}
+        spacing={2}
+      >
         {filteredProducts.length ? (
           filteredProducts.map((product) => (
             <ProductCard

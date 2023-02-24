@@ -79,7 +79,7 @@ const Cart = () => {
     !isLoading && cart._id !== "undefined" && cart.items.length > 0;
 
   return (
-    <Container sx={{ my: 0 }} maxWidth="xl">
+    <Container sx={{ my: 0, mt: 20 }} maxWidth="xl">
       {isLoading ? (
         <Loading />
       ) : (
@@ -116,7 +116,7 @@ const Cart = () => {
                 <Button
                   variant="contained"
                   type="submit"
-                  color="secondary"
+                  color="primary"
                   disabled={!cartExists}
                   onClick={makeOrder}
                 >
@@ -125,7 +125,7 @@ const Cart = () => {
                 <Button
                   variant="contained"
                   type="submit"
-                  color="secondary"
+                  color="primary"
                   disabled={!cartExists}
                   onClick={emptyCart}
                 >

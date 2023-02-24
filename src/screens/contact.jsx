@@ -30,11 +30,12 @@ function Contact() {
     useFormControls();
 
   return (
-    <Container component="main" sx={{ my: 0 }} maxWidth="xl">
+    <Container component="main" sx={{ my: 0, mt: 20 }} maxWidth="xl">
       <form autoComplete="off" onSubmit={handleFormSubmit}>
         {inputFieldValues.map((inputFieldValue, index) => {
           return (
             <TextField
+              sx={{ pb: 3 }}
               key={index}
               onChange={handleInputValue}
               onBlur={handleInputValue}
@@ -55,7 +56,7 @@ function Contact() {
         <Button
           variant="contained"
           type="submit"
-          color="secondary"
+          color="primary"
           disabled={!formIsValid()}
         >
           Send Message
