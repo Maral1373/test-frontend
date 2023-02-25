@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Outlet, useOutletContext } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { styled } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 
 import AppBar from "../components/AppBar";
 import Footer from "../components/Footer";
@@ -13,10 +13,6 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-
-const Wrapper = styled("div")(({ theme }) => ({
-  marginTop: 70,
-}));
 
 function Layout() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,7 +25,17 @@ function Layout() {
       <CssBaseline />
       <Snackbar open={open} setOpen={setOpen} text={text} severity={severity} />
       <AppBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <Wrapper>
+      <Container
+        disableGutters
+        sx={{
+          [theme.breakpoints.up("xs")]: {
+            marginTop: 7,
+          },
+          [theme.breakpoints.up("md")]: {
+            marginTop: 9,
+          },
+        }}
+      >
         <Outlet
           context={{
             searchQuery,
@@ -37,7 +43,7 @@ function Layout() {
             snackbar: { setOpen, setText, setSeverity },
           }}
         />
-      </Wrapper>
+      </Container>
       <Footer />
     </ThemeProvider>
   );
