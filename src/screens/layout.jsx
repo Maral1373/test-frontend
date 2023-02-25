@@ -26,7 +26,8 @@ function Layout() {
       <Snackbar open={open} setOpen={setOpen} text={text} severity={severity} />
       <AppBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Container
-        disableGutters
+        disableGutters={true}
+        maxWidth={false}
         sx={{
           [theme.breakpoints.up("xs")]: {
             marginTop: 7,

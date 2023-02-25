@@ -45,7 +45,7 @@ export default function ProductDetails() {
         ) : (
           <Card>
             <Grid container width={"100vw"} spacing={2}>
-              <Grid item xs={12} sm={3}>
+              <Grid item xs={12} md={3}>
                 <CardMedia
                   maxWidth="xl"
                   component="img"
@@ -60,7 +60,7 @@ export default function ProductDetails() {
                   image={product.info.photo}
                 />
               </Grid>
-              <Grid item xs={12} sm={9}>
+              <Grid item xs={12} md={9}>
                 <CardContent
                   sx={{
                     flexGrow: 1,

@@ -26,7 +26,7 @@ const CarouselComponent = () => {
       width="100%"
       height="40vh"
       captionStyle={captionStyle}
-      radius="10px"
+      // radius="10px"
       captionPosition="bottom"
       automatic={true}
       dots={true}

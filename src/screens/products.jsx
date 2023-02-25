@@ -17,6 +17,7 @@ import Carousel from "../components/Carousel";
 import HeaderBoxes from "../components/HeaderBoxes";
 import { getToken } from "../api/token";
 import { useCustomContext } from "./layout";
+import Container from "@mui/material/Container";
 
 export default function Products(props) {
   const theme = useTheme();
@@ -62,40 +63,53 @@ export default function Products(props) {
     : null;
 
   return (
-    <main>
-      <Box
-        sx={{
-          bgcolor: "background.paper",
-          width: "100%",
-        }}
-      >
-        <Carousel />
-        <HeaderBoxes />
-      </Box>
-      <Grid container sx={{ margin: "auto", maxWidth: "80vw" }} spacing={2}>
-        <Grid item xs={12} sm={3}>
-          <FiltersList setFilter={setFilter} />
-        </Grid>
-        <Grid item xs={12} sm={9}>
-          <Grid container spacing={2}>
-            {filteredProducts ? (
-              filteredProducts.map((product) => (
-                <ProductCard
-                  key={product._id}
-                  addToCart={addToCart}
-                  addToFavorite={addToFavorite}
-                  removeFromFavorite={removeFromFavorite}
-                  product={product}
-                  isFavorited={favorites.includes(product._id)}
-                  reload={initialize}
-                />
-              ))
-            ) : (
-              <Loading />
-            )}
+    <>
+      <Carousel />
+      <Container component="main" maxWidth="xl">
+        <Grid container direction="column">
+          <Grid item>
+            <HeaderBoxes />
+          </Grid>
+          <Grid item>
+            <Grid container>
+              <Grid
+                item
+                xs={12}
+                md={3}
+                sx={{
+                  [theme.breakpoints.up("xs")]: {
+                    padding: 0,
+                  },
+                  [theme.breakpoints.up("md")]: {
+                    padding: 2,
+                  },
+                }}
+              >
+                <FiltersList setFilter={setFilter} />
+              </Grid>
+              <Grid item xs={12} md={9}>
+                <Grid container spacing={2}>
+                  {filteredProducts ? (
+                    filteredProducts.map((product) => (
+                      <ProductCard
+                        key={product._id}
+                        addToCart={addToCart}
+                        addToFavorite={addToFavorite}
+                        removeFromFavorite={removeFromFavorite}
+                        product={product}
+                        isFavorited={favorites.includes(product._id)}
+                        reload={initialize}
+                      />
+                    ))
+                  ) : (
+                    <Loading />
+                  )}
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </main>
+      </Container>
+    </>
   );
 }

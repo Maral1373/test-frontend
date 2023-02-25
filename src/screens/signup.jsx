@@ -78,7 +78,7 @@ export default function SignUp() {
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={6}>
               <TextField
                 autoComplete="given-name"
                 name="firstName"
@@ -90,7 +90,7 @@ export default function SignUp() {
                 onChange={onChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={6}>
               <TextField
                 required
                 fullWidth
@@ -101,7 +101,7 @@ export default function SignUp() {
                 onChange={onChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={6}>
               <TextField
                 required
                 fullWidth
@@ -112,7 +112,7 @@ export default function SignUp() {
                 onChange={onChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={6}>
               <TextField
                 required
                 fullWidth

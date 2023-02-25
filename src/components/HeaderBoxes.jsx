@@ -30,7 +30,7 @@ export default function HeaderBoxes() {
           key={content.text}
           item
           xs={12}
-          sm={4}
+          md={4}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -46,15 +46,10 @@ export default function HeaderBoxes() {
               width: "100px",
               ...content.avatarStyles,
             }}
-            // item
           >
             {content.avatar}
           </Avatar>
-          <Box
-            //item
-            textAlign={"center"}
-            sx={{ pt: 2 }}
-          >
+          <Box textAlign={"center"} sx={{ pt: 2 }}>
             {content.text}
           </Box>
         </Grid>
