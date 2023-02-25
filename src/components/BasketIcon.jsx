@@ -9,7 +9,7 @@ export const BasketIcon = () => {
     <Link to={"/basket"} style={{ textDecoration: "none", color: "#282A3A" }}>
       <ShoppingBasketIcon
         sx={{
-          ml: 5,
+          // ml: 5,
           color: "black",
           cursor: "pointer",
         }}

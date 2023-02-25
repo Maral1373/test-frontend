@@ -65,12 +65,8 @@ const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing("20%"),
-    width: "auto",
-  },
+  width: "85%",
+  margin: "auto",
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -132,191 +128,220 @@ function ResponsiveAppBar({ searchQuery, setSearchQuery }) {
     ? userSettings.filter((s) => s.private)
     : userSettings.filter((s) => !s.private);
 
+  const desktopTypography = (
+    <>
+      <ShoppingBagOutlinedIcon sx={{ display: { xs: "none", md: "flex" } }} />
+      <Typography
+        variant="h6"
+        noWrap
+        component="a"
+        href="/"
+        underline="none"
+        sx={{
+          ml: 2,
+          display: { xs: "none", md: "flex" },
+          letterSpacing: "0.1rem",
+          color: "Black",
+          textDecoration: "none",
+          typography: {
+            fontFamily: `"Open Sans", sons-serif`,
+            fontSize: 20,
+            fontWeight: 700,
+          },
+        }}
+      >
+        {SITE_NAME}
+      </Typography>
+    </>
+  );
+
+  const mobileMenu = (
+    <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+      <IconButton
+        size="large"
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={handleOpenNavMenu}
+      >
+        <MenuIcon />
+      </IconButton>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorElNav}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        open={Boolean(anchorElNav)}
+        onClose={handleCloseNavMenu}
+        sx={{
+          display: { xs: "block", md: "none" },
+        }}
+      >
+        {pages.map((page) => (
+          <MenuItem
+            key={page.title}
+            onClick={handleCloseNavMenu}
+            sx={{
+              cursor: "pointer",
+              "&:hover": {
+                backgroundColor: "#DEEDF0",
+              },
+            }}
+          >
+            <Link
+              to={page.link}
+              style={{ textDecoration: "none", color: "#282A3A" }}
+            >
+              <Typography textAlign="center">{page.title}</Typography>
+            </Link>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
+  );
+
+  const mobileTypography = (
+    <Typography
+      noWrap
+      component="a"
+      href=""
+      sx={{
+        display: { xs: "flex", md: "none" },
+        flexGrow: 1,
+        fontFamily: "inherit",
+        fontWeight: 700,
+        letterSpacing: ".01rem",
+        color: "Black",
+        textDecoration: "none",
+      }}
+    >
+      {SITE_NAME}
+    </Typography>
+  );
+
+  const searchComponent = (
+    <Search sx={{ display: { xs: "none", md: "flex" } }}>
+      <SearchIconWrapper>
+        <SearchIcon />
+      </SearchIconWrapper>
+      <StyledInputBase
+        value={searchQuery}
+        placeholder="Search…"
+        inputProps={{ "aria-label": "search" }}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+    </Search>
+  );
+
+  const navBarLinks = pages.map((page) => (
+    <Link key={page.title} to={page.link} style={{ textDecoration: "none" }}>
+      {/** change styling here, remove underline for links */}
+      <Button
+        key={page.title}
+        onClick={handleCloseNavMenu}
+        sx={{
+          my: 2,
+          color: "Black",
+          display: "block",
+          "&:hover": {
+            backgroundColor: alpha(theme.palette.common.white, 0.25),
+          },
+        }}
+      >
+        {page.title}
+      </Button>
+    </Link>
+  ));
+
+  const userMenu = (
+    <>
+      <Tooltip title="Open settings">
+        <IconButton
+          onClick={handleOpenUserMenu}
+          sx={{
+            p: 0,
+            [theme.breakpoints.up("xs")]: {
+              marginLeft: 2,
+            },
+            [theme.breakpoints.up("md")]: {
+              marginLeft: 8,
+            },
+          }}
+        >
+          <Avatar alt="User" src="" />
+        </IconButton>
+      </Tooltip>
+      <Menu
+        sx={{ mt: "45px" }}
+        id="menu-appbar"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        {settingItemsToShow.map((setting) => (
+          <MenuItem
+            key={setting.title}
+            onClick={handleCloseUserMenu}
+            sx={{
+              cursor: "pointer",
+              "&:hover": {
+                backgroundColor: "#DEEDF0",
+              },
+            }}
+          >
+            <Link
+              to={setting.link}
+              style={{ textDecoration: "none", color: "#282A3A" }}
+            >
+              {setting.title}
+            </Link>
+          </MenuItem>
+        ))}
+      </Menu>
+    </>
+  );
+
   return (
     <AppBar position="fixed" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <ShoppingBagOutlinedIcon
-            sx={{ display: { xs: "none", md: "flex" }, mr: 5 }}
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            underline="none"
+          {desktopTypography}
+          {mobileMenu}
+          {mobileTypography}
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {isOnProductsPage && searchComponent}
+          </Box>
+          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+            {navBarLinks}
+          </Box>
+          <Box
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              letterSpacing: "0.1rem",
-              color: "Black",
-              textDecoration: "none",
-              typography: {
-                fontFamily: `"Open Sans", sons-serif`,
-                fontSize: 20,
-                fontWeight: 700,
+              paddingTop: 1,
+              [theme.breakpoints.up("md")]: {
+                paddingLeft: 2,
               },
             }}
           >
-            {SITE_NAME}
-          </Typography>
-          {/* menu phone */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              // color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page.title}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    cursor: "pointer",
-                    "&:hover": {
-                      backgroundColor: "#DEEDF0",
-                    },
-                  }}
-                >
-                  <Link
-                    to={page.link}
-                    style={{ textDecoration: "none", color: "#282A3A" }}
-                  >
-                    <Typography textAlign="center">{page.title}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
+            <BasketIcon />
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "inherit",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "Black",
-              textDecoration: "none",
-            }}
-          >
-            {SITE_NAME}
-          </Typography>
-          {isOnProductsPage && (
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                value={searchQuery}
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </Search>
-          )}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
-          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Link
-                key={page.title}
-                to={page.link}
-                style={{ textDecoration: "none" }}
-              >
-                {/** change styling here, remove underline for links */}
-                <Button
-                  key={page.title}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: "Black",
-                    display: "block",
-                    "&:hover": {
-                      backgroundColor: alpha(theme.palette.common.white, 0.25),
-                    },
-                  }}
-                >
-                  {page.title}
-                </Button>
-              </Link>
-            ))}
-          </Box>
-          <BasketIcon />
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton
-                onClick={handleOpenUserMenu}
-                sx={{ p: 0, marginLeft: 8 }}
-              >
-                <Avatar alt="Maral Erfanian" src="" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px", marginLeft: "-15px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settingItemsToShow.map((setting) => (
-                <MenuItem
-                  key={setting.title}
-                  onClick={handleCloseUserMenu}
-                  sx={{
-                    cursor: "pointer",
-                    "&:hover": {
-                      backgroundColor: "#DEEDF0",
-                    },
-                  }}
-                >
-                  <Link
-                    to={setting.link}
-                    style={{ textDecoration: "none", color: "#282A3A" }}
-                  >
-                    {/** change styling, remove underline */}
-                    <Typography textAlign="center">{setting.title}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          <Box sx={{ flexGrow: 0 }}>{userMenu}</Box>
         </Toolbar>
       </Container>
     </AppBar>
