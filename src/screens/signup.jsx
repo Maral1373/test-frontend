@@ -61,7 +61,7 @@ export default function SignUp() {
   };
 
   return (
-    <Container component="main" maxWidth="xl">
+    <Container component="main" maxWidth="xs">
       <Box
         sx={{
           marginTop: 30,

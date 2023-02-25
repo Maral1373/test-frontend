@@ -46,15 +46,10 @@ export default function HeaderBoxes() {
               width: "100px",
               ...content.avatarStyles,
             }}
-            // item
           >
             {content.avatar}
           </Avatar>
-          <Box
-            //item
-            textAlign={"center"}
-            sx={{ pt: 2 }}
-          >
+          <Box textAlign={"center"} sx={{ pt: 2 }}>
             {content.text}
           </Box>
         </Grid>
