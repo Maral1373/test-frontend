@@ -30,7 +30,7 @@ export default function HeaderBoxes() {
           key={content.text}
           item
           xs={12}
-          sm={4}
+          md={4}
           sx={{
             display: "flex",
             flexDirection: "column",

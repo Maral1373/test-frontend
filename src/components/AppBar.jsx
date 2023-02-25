@@ -41,7 +41,7 @@ const pages = [
 const userSettings = [
   { title: "Sign in", link: "login", private: false },
   { title: "Sign up", link: "signup", private: false },
-  { title: "Forgot Password", link: "forgot", private: false },
+  // { title: "Forgot Password", link: "forgot", private: false },
   { title: "Admin Sign in", link: "admin/login", private: false },
   { title: "Admin Sign up", link: "admin/signup", private: false },
   { title: "Profile", link: "profile", private: true },
@@ -87,7 +87,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("xs")]: {
       width: "12ch",
       "&:focus": {
         width: "20ch",

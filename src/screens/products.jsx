@@ -72,11 +72,23 @@ export default function Products(props) {
         <Carousel />
         <HeaderBoxes />
       </Box>
-      <Grid container sx={{ margin: "auto", maxWidth: "80vw" }} spacing={2}>
-        <Grid item xs={12} sm={3}>
+      <Grid container maxWidth="xl">
+        <Grid
+          item
+          xs={12}
+          md={3}
+          sx={{
+            [theme.breakpoints.up("xs")]: {
+              padding: 0,
+            },
+            [theme.breakpoints.up("md")]: {
+              padding: 2,
+            },
+          }}
+        >
           <FiltersList setFilter={setFilter} />
         </Grid>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={12} md={9}>
           <Grid container spacing={2}>
             {filteredProducts ? (
               filteredProducts.map((product) => (
